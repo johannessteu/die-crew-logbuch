@@ -8,11 +8,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const identifier = generateRandomGameIdentifier();
 
   const {
-    query: { attendees },
+    query: { attendees, crewName },
   } = req;
 
   const gameData: GameInterface = {
     identifier,
+    crewName: crewName as string,
     player: attendees as string[],
     currentMission: 1,
     missions: [

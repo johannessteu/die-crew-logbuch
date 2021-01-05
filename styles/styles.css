@@ -2,21 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+    font-family: 'Mukta';
+    font-style: normal;
+    font-weight: 400;
+    src: local(''),
+    url('/fonts/mukta-v7-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+    url('/fonts/mukta-v7-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
 
+@font-face {
+    font-family: 'Mukta';
+    font-style: normal;
+    font-weight: 700;
+    src: local(''),
+    url('/fonts/mukta-v7-latin-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+    url('/fonts/mukta-v7-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
 @layer components {
     .btn {
-        @apply rounded-md bg-white shadow text-gray-700 font-bold py-2 px-6 text-center
+        @apply transform font-mono uppercase tracking-normal rounded-md bg-white text-gray-700 py-3 px-6 text-center
     }
 
     .btn-secondary {
-        @apply bg-green-700 text-white
+        @apply hover:translate-y-0.5
     }
 
     .btn-primary {
-        @apply bg-blue-600 text-white
+        @apply text-white bg-blue-600 hover:translate-y-0.5
     }
 
     .inp {
-        @apply text-gray-700 mr-0 focus:outline-none flex-1 appearance-none rounded shadow p-3
+        @apply text-gray-700 focus:outline-none appearance-none rounded shadow p-3 text-xl
     }
 }

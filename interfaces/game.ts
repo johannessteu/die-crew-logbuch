@@ -9,6 +9,7 @@ export interface MissionInterface {
 
 export interface GameInterface {
   identifier: string;
+  crewName: string;
   player: string[];
   currentMission: number;
   missions: MissionInterface[];

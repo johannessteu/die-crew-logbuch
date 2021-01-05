@@ -1,21 +1,22 @@
 import { useRouter } from 'next/router';
 import qs from 'querystring';
 import * as React from 'react';
-import { useState } from 'react';
-import Section from '../Section';
+import { useRef, useState } from 'react';
 
 const AttendeeTag: React.FC = ({ children }) => {
-  return <li className="p-4 hover:bg-gray-50 cursor-pointer">{children}</li>;
+  return <li className="p-4 text-xl text-gray-900">{children}</li>;
 };
 
 const NewGame: React.FC = ({ children }) => {
   const router = useRouter();
+  const newAttendeeRef = useRef(null);
+  const [crewName, setCrewName] = useState('');
   const [newAttendee, setNewAttendee] = useState('');
   const [attendees, setAttendees] = useState<string[]>([]);
 
   const handleCreateGame = async () => {
     const res = await fetch(
-      'api/startgame?' + qs.stringify({ attendees })
+      'api/startgame?' + qs.stringify({ attendees, crewName })
     ).then((res) => res.json());
 
     // Give firebase some time
@@ -26,41 +27,74 @@ const NewGame: React.FC = ({ children }) => {
     }, 500);
   };
 
+  const isValid = crewName.length > 0 && attendees.length > 1;
+
+  const handleAddNewCrewMember = () => {
+    setAttendees([...attendees, newAttendee]);
+    setNewAttendee('');
+    newAttendeeRef.current.focus();
+  };
+
   return (
-    <Section bg="white">
-      <h1>Begib dich auf eine neue Mission!</h1>
-      <p>Wer gehört alles deiner Crew an?</p>
-
-      <input
-        className="inp"
-        placeholder="Spielername"
-        value={newAttendee}
-        onChange={(e) => setNewAttendee(e.target.value)}
-      />
-      <button
-        className="btn btn-secondary"
-        onClick={() => {
-          setAttendees([...attendees, newAttendee]);
-          setNewAttendee('');
-        }}
-      >
-        Hinzufügen
-      </button>
-
-      <div className="bg-white shadow-md rounded-md w-1/2">
-        <ul className="divide-y divide-gray-300">
-          {attendees.map((attendee) => (
-            <AttendeeTag key={attendee}>{attendee}</AttendeeTag>
-          ))}
-        </ul>
+    <>
+      <div className="mb-8">
+        <label className="block font-mono mb-2 text-md">
+          Gibt deiner Crew einen Namen
+        </label>
+        <input
+          className="inp w-2/3"
+          placeholder="Crew-Name"
+          value={crewName}
+          onChange={(e) => setCrewName(e.target.value)}
+        />
       </div>
 
-      <div>
-        <button onClick={() => handleCreateGame()} className="btn btn-primary">
-          Spiel starten
+      <div className="mb-6">
+        <label className="block font-mono mb-2 text-md">
+          Wer ist alles Teil deiner Crew?
+        </label>
+        <input
+          ref={newAttendeeRef}
+          className="inp w-2/3 mr-3"
+          placeholder="Astronautin Jutta"
+          value={newAttendee}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              handleAddNewCrewMember();
+            }
+          }}
+          onChange={(e) => setNewAttendee(e.target.value)}
+        />
+        <button className="btn" onClick={() => handleAddNewCrewMember()}>
+          Hinzufügen
         </button>
       </div>
-    </Section>
+      {attendees.length > 0 && (
+        <>
+          <label className="block font-mono mb-2 text-md">
+            Crew Mitglieder
+          </label>
+
+          <div className="bg-white rounded-md w-2/3 mb-6">
+            <ul className="divide-y divide-gray-300 ">
+              {attendees.map((attendee) => (
+                <AttendeeTag key={attendee}>{attendee}</AttendeeTag>
+              ))}
+            </ul>
+          </div>
+        </>
+      )}
+
+      <div>
+        <button
+          disabled={!isValid}
+          onClick={() => handleCreateGame()}
+          className="btn btn-primary disabled:opacity-70"
+        >
+          Auf zum 9. Planeten!
+        </button>
+      </div>
+    </>
   );
 };
 
