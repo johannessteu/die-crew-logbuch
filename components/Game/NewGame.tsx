@@ -37,37 +37,39 @@ const NewGame: React.FC = ({ children }) => {
 
   return (
     <>
-      <div className="mb-8">
+      <div className="mb-8 flex flex-col items-stretch">
         <label className="block font-mono mb-2 text-md">
           Gibt deiner Crew einen Namen
         </label>
         <input
-          className="inp w-2/3"
+          className="inp"
           placeholder="Crew-Name"
           value={crewName}
           onChange={(e) => setCrewName(e.target.value)}
         />
       </div>
 
-      <div className="mb-6">
+      <div className="mb-6 ">
         <label className="block font-mono mb-2 text-md">
           Wer ist alles Teil deiner Crew?
         </label>
-        <input
-          ref={newAttendeeRef}
-          className="inp w-2/3 mr-3"
-          placeholder="Astronautin Jutta"
-          value={newAttendee}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              handleAddNewCrewMember();
-            }
-          }}
-          onChange={(e) => setNewAttendee(e.target.value)}
-        />
-        <button className="btn" onClick={() => handleAddNewCrewMember()}>
-          Hinzufügen
-        </button>
+        <div className="flex">
+          <input
+            ref={newAttendeeRef}
+            className="inp w-2/3 mr-3"
+            placeholder="Astronautin Jutta"
+            value={newAttendee}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                handleAddNewCrewMember();
+              }
+            }}
+            onChange={(e) => setNewAttendee(e.target.value)}
+          />
+          <button className="btn" onClick={() => handleAddNewCrewMember()}>
+            Hinzufügen
+          </button>
+        </div>
       </div>
       {attendees.length > 0 && (
         <>
@@ -75,7 +77,7 @@ const NewGame: React.FC = ({ children }) => {
             Crew Mitglieder
           </label>
 
-          <div className="bg-white rounded-md w-2/3 mb-6">
+          <div className="bg-white rounded-md md:w-2/3 mb-6">
             <ul className="divide-y divide-gray-300 ">
               {attendees.map((attendee) => (
                 <AttendeeTag key={attendee}>{attendee}</AttendeeTag>

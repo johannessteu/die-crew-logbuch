@@ -6,7 +6,6 @@ export default function Home() {
   return (
     <>
       <StartSection />
-
       <Section bg={'bg-gray-200'}>
         <div className="flex">
           <div className="flex-1">

@@ -11,17 +11,13 @@ const StartSection: React.FC = ({ children }) => {
   const [viewMode, setViewMode] = useState<ViewMode>('INTRO');
 
   return (
-    <div className="relative flex justify-center py-20">
+    <div className="relative flex justify-center py-10 md:py-20">
       <Image
         className={'object-center object-cover pointer-events-none'}
         src="/space.jpg"
         layout={'fill'}
       />
-      <div
-        className={
-          'relative place-self-center z-1 w-100 sm:w-10/12 lg:w-2/3 max-w-7xl'
-        }
-      >
+      <div className="relative place-self-center z-1 w-100 w-11/12 sm:w-10/12 lg:w-2/3 max-w-7xl">
         <div className="text-left w-full text-white">
           <h2 className="font-mono uppercase text-sm tracking-widest font-medium mb-2 inline-block border-b-2 border-red-500">
             Die Crew
@@ -30,14 +26,14 @@ const StartSection: React.FC = ({ children }) => {
             Das Logbuch
           </h1>
 
-          <div className="bg-gray-200 rounded px-5 py-3 bg-opacity-20 w-2/3">
+          <div className="bg-gray-200 rounded px-5 py-3 bg-opacity-20 md:w-10/12 xl:w-2/3 max-w-2xl">
             {viewMode === 'NEW' ? (
               <NewGame />
             ) : viewMode === 'RESUME' ? (
               <ResumeGame />
             ) : (
               <>
-                <p className="font-sans text-xl mb-10 w-2/3">
+                <p className="font-sans text-xl mb-10 md:max-w-lg xl:max-w-xl">
                   Du willst gemeinsam mit deiner Crew zum 9. Planeten reisen,
                   weißt aber nicht genau wie und wo du deine Reise am besten
                   dokumentieren kannst? Dann bist du hier beim Logbuch genau
@@ -45,9 +41,9 @@ const StartSection: React.FC = ({ children }) => {
                   bisherige Reise weiter fort und dokumentiere deinen
                   Spielfortschritt!
                 </p>{' '}
-                <div className="flex">
+                <div className="flex flex-col md:flex-row">
                   <button
-                    className="btn btn-primary mr-6"
+                    className="btn btn-primary mb-2  md:mr-6 md:mb-0"
                     onClick={() => setViewMode('NEW')}
                   >
                     Neues Spiel starten
