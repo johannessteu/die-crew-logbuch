@@ -1,0 +1,13 @@
+*.d.ts
+*.md
+*.svg
+*.png
+*.jpg
+*.graphql
+favicon.ico
+*.json
+*.lock
+.next
+public/
+styles
+tailwind.config.js

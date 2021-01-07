@@ -1,7 +1,8 @@
-import "../styles/styles.css";
-import { AppProps } from "next/app";
+import React from 'react';
+import '../styles/styles.css';
+import { AppProps } from 'next/app';
 
-const App = ({ Component, pageProps }: AppProps) => {
+const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   return <Component {...pageProps} />;
 };
 

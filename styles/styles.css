@@ -20,6 +20,11 @@
     url('/fonts/mukta-v7-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 @layer components {
+
+    .heroHeadline {
+        @apply font-sans tracking-tight bg-clip-text text-5xl font-medium mb-6
+    }
+
     .btn {
         @apply transform font-mono uppercase tracking-normal rounded-md bg-white text-gray-700 py-3 px-6 text-center
     }
@@ -30,6 +35,10 @@
 
     .btn-primary {
         @apply text-white bg-blue-600 hover:translate-y-0.5
+    }
+
+    .btn-small {
+        @apply  text-sm px-4
     }
 
     .inp {

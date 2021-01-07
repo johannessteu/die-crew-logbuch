@@ -7,7 +7,7 @@ const AttendeeTag: React.FC = ({ children }) => {
   return <li className="p-4 text-xl text-gray-900">{children}</li>;
 };
 
-const NewGame: React.FC = ({ children }) => {
+const NewGame: React.FC = () => {
   const router = useRouter();
   const newAttendeeRef = useRef(null);
   const [crewName, setCrewName] = useState('');
@@ -16,8 +16,8 @@ const NewGame: React.FC = ({ children }) => {
 
   const handleCreateGame = async () => {
     const res = await fetch(
-      'api/startgame?' + qs.stringify({ attendees, crewName })
-    ).then((res) => res.json());
+      `api/startgame?${qs.stringify({ attendees, crewName })}`
+    ).then((r) => r.json());
 
     // Give firebase some time
     setTimeout(() => {
@@ -38,10 +38,12 @@ const NewGame: React.FC = ({ children }) => {
   return (
     <>
       <div className="mb-8 flex flex-col items-stretch">
-        <label className="block font-mono mb-2 text-md">
+        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+        <label htmlFor="crewName" className="block font-mono mb-2 text-md">
           Gibt deiner Crew einen Namen
         </label>
         <input
+          id="crewName"
           className="inp"
           placeholder="Crew-Name"
           value={crewName}
@@ -50,11 +52,12 @@ const NewGame: React.FC = ({ children }) => {
       </div>
 
       <div className="mb-6 ">
-        <label className="block font-mono mb-2 text-md">
+        <label htmlFor="newMember" className="block font-mono mb-2 text-md">
           Wer ist alles Teil deiner Crew?
         </label>
         <div className="flex">
           <input
+            id="newMember"
             ref={newAttendeeRef}
             className="inp w-2/3 mr-3"
             placeholder="Astronautin Jutta"
@@ -66,16 +69,18 @@ const NewGame: React.FC = ({ children }) => {
             }}
             onChange={(e) => setNewAttendee(e.target.value)}
           />
-          <button className="btn" onClick={() => handleAddNewCrewMember()}>
+          <button
+            type="button"
+            className="btn"
+            onClick={() => handleAddNewCrewMember()}
+          >
             Hinzufügen
           </button>
         </div>
       </div>
       {attendees.length > 0 && (
         <>
-          <label className="block font-mono mb-2 text-md">
-            Crew Mitglieder
-          </label>
+          <span className="block font-mono mb-2 text-md">Crew Mitglieder</span>
 
           <div className="bg-white rounded-md md:w-2/3 mb-6">
             <ul className="divide-y divide-gray-300 ">
@@ -89,6 +94,7 @@ const NewGame: React.FC = ({ children }) => {
 
       <div>
         <button
+          type="submit"
           disabled={!isValid}
           onClick={() => handleCreateGame()}
           className="btn btn-primary disabled:opacity-70"

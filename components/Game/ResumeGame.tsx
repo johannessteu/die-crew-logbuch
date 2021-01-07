@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import * as React from 'react';
 
-const ResumeGame: React.FC = ({ children }) => {
+const ResumeGame: React.FC = () => {
   const router = useRouter();
   const [gameIdentifier, setGameIdentifier] = useState('');
 
@@ -13,10 +13,11 @@ const ResumeGame: React.FC = ({ children }) => {
   return (
     <div className="flex flex-col md:flex-row md:items-end md:mb-4">
       <div className="md:flex-grow flex items-stretch flex-col mb: mr-3">
-        <label className="block font-mono mb-2 text-md">
+        <label htmlFor="gameId" className="block font-mono mb-2 text-md">
           Gib deine Spiel-ID ein
         </label>
         <input
+          id="gameId"
           placeholder="AR2130"
           className="inp mb-4 flex-grow md:mb-0"
           value={gameIdentifier}
@@ -24,7 +25,7 @@ const ResumeGame: React.FC = ({ children }) => {
         />
       </div>
 
-      <button className="btn btn-primary" onClick={handleResume}>
+      <button type="submit" className="btn btn-primary" onClick={handleResume}>
         Weiter spielen
       </button>
     </div>
