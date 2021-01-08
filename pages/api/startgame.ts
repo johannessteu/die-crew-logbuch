@@ -44,7 +44,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     ],
   };
 
-  gamesRef.doc(identifier).set(gameData);
+  await gamesRef.doc(identifier).set(gameData);
 
   res.statusCode = 200;
   res.setHeader('Content-Type', 'application/json');
