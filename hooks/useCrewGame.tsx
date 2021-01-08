@@ -88,6 +88,7 @@ const reducer = (prev: GameInterface, action: Action): GameInterface => {
             finishedAt: 0,
             startedAt: null,
             took: null,
+            note: '',
             mission: action.payload.mission + 1,
             success: false,
           },
