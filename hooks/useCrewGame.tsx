@@ -29,9 +29,10 @@ const useCrewGame = (): ContextInterface => {
 type Action =
   | { type: 'START_MISSION'; payload: { mission: number } }
   | { type: 'RETRY_MISSION'; payload: { mission: number } }
+  | { type: 'ADD_NOTE'; payload: { mission: number; note: string } }
   | {
       type: 'FINISH_MISSION';
-      payload: { mission: number; distressSignalUsed: boolean; note: string };
+      payload: { mission: number; distressSignalUsed: boolean };
     };
 
 const reducer = (prev: GameInterface, action: Action): GameInterface => {
@@ -89,7 +90,17 @@ const reducer = (prev: GameInterface, action: Action): GameInterface => {
             took: null,
             mission: action.payload.mission + 1,
             success: false,
-            note: '',
+          },
+        ],
+      };
+    case 'ADD_NOTE':
+      return {
+        ...prev,
+        missions: [
+          ...otherMissions,
+          {
+            ...currentMission,
+            note: action.payload.note,
           },
         ],
       };

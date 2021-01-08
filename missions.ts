@@ -18,7 +18,13 @@ export const missions: GameMissionInterface[] = [
     note:
       'Der Kommander fragt nach dem Befinden der mitspieler und bestimmt wer keinen Stick bekommen darf',
     taskCards: 4,
-    taskTokens: [],
+    taskTokens: [
+      TaskTokenEnum.TOKEN_BEFORE_1,
+      TaskTokenEnum.TOKEN_BEFORE_3,
+      TaskTokenEnum.TOKEN_BEFORE_2,
+      TaskTokenEnum.TOKEN_LAST,
+      TaskTokenEnum.TOKEN_BEFORE_4,
+    ],
   },
   {
     id: 4,
