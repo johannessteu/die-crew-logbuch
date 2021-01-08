@@ -17,14 +17,20 @@ const NewGame: React.FC = () => {
 
   const handleCreateGame = async () => {
     setLoading(true);
+
     const res = await fetch(
-      `api/startgame?${qs.stringify({ attendees, crewName })}`
+      `api/startgame?${qs.stringify({
+        attendees: attendees.join(','),
+        crewName,
+      })}`
     ).then((r) => r.json());
 
     // Give firebase some time
     setTimeout(() => {
       if (res.success === true) {
         router.push(`/spiel/${res.identifier}`);
+      } else {
+        console.error(res);
       }
     }, 500);
   };

@@ -28,7 +28,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const gameData: GameInterface = {
     identifier,
     crewName: crewName as string,
-    player: attendees as string[],
+    player: attendees.toString().split(','),
     currentMission: 1,
     missions: [
       {
