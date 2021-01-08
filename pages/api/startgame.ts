@@ -34,7 +34,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       {
         mission: 1,
         distressSignalUsed: false,
-        trials: 1,
+        trials: 0,
         success: false,
         note: '',
         took: null,

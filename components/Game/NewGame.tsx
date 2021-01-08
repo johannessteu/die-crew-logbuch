@@ -10,11 +10,13 @@ const AttendeeTag: React.FC = ({ children }) => {
 const NewGame: React.FC = () => {
   const router = useRouter();
   const newAttendeeRef = useRef(null);
+  const [loading, setLoading] = useState(false);
   const [crewName, setCrewName] = useState('');
   const [newAttendee, setNewAttendee] = useState('');
   const [attendees, setAttendees] = useState<string[]>([]);
 
   const handleCreateGame = async () => {
+    setLoading(true);
     const res = await fetch(
       `api/startgame?${qs.stringify({ attendees, crewName })}`
     ).then((r) => r.json());
@@ -92,14 +94,40 @@ const NewGame: React.FC = () => {
         </>
       )}
 
+      <svg
+        className="animate-spin h-5 w-5 text-white fill-current "
+        viewBox="0 0 24 24"
+      />
       <div>
         <button
           type="submit"
-          disabled={!isValid}
+          disabled={!isValid || loading}
           onClick={() => handleCreateGame()}
-          className="btn btn-primary disabled:opacity-70"
+          className="btn btn-primary disabled:opacity-70 flex"
         >
-          Auf zum 9. Planeten!
+          {loading && (
+            <svg
+              className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              />
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              />
+            </svg>
+          )}
+          {loading ? 'Spiel wird gestartet' : 'Auf zum 9. Planeten!'}
         </button>
       </div>
     </>
