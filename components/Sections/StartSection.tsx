@@ -1,5 +1,6 @@
+import { useRouter } from 'next/router';
 import * as React from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import NewGame from '../Game/NewGame';
 import ResumeGame from '../Game/ResumeGame';
 import TransparentBox from '../TransparentBox';
@@ -8,7 +9,15 @@ import HeroSection from './HeroSection';
 type ViewMode = 'INTRO' | 'NEW' | 'RESUME';
 
 const StartSection: React.FC = () => {
+  const router = useRouter();
   const [viewMode, setViewMode] = useState<ViewMode>('INTRO');
+
+  useEffect(() => {
+    const { notfound } = router.query;
+    if (notfound === '1') {
+      setViewMode('RESUME');
+    }
+  }, [router.query]);
 
   return (
     <HeroSection>

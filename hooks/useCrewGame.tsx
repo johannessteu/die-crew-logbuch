@@ -122,8 +122,15 @@ const CrewGameProvider: React.FC<{
   >(reducer, game, undefined);
 
   useEffect(() => {
-    const id = setTimeout(() => {
-      console.log('todo - sync data');
+    const id = setTimeout(async () => {
+      await fetch('/api/sync', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(state),
+      });
     }, 2000);
 
     return () => clearTimeout(id);

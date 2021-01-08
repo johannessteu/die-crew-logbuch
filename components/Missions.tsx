@@ -244,15 +244,16 @@ const Mission: React.FC<{
                     </span>
 
                     <div className="flex flex-wrap">
-                      {gameMission.taskTokens.map((token) => {
-                        return (
-                          <div className="bg-purple-700 mb-2 mr-2 p-1 w-14 h-18 rounded text-center">
-                            <div className="bg-purple-700 text-white ring-2 ring-white h-14 ring-inset p-3 rounded">
-                              {getTokenElement(token)}
-                            </div>
+                      {gameMission.taskTokens.map((token) => (
+                        <div
+                          key={token}
+                          className="bg-purple-700 mb-2 mr-2 p-1 w-14 h-18 rounded text-center"
+                        >
+                          <div className="bg-purple-700 text-white ring-2 ring-white h-14 ring-inset p-3 rounded">
+                            {getTokenElement(token)}
                           </div>
-                        );
-                      })}
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>

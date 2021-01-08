@@ -60,7 +60,8 @@ export const getServerSideProps: GetServerSideProps<GamePageInterface> = async (
   const doc = await docRef.get();
 
   if (!doc.exists) {
-    res.writeHead(307, { Location: '/' });
+    res.writeHead(307, { Location: '/?notfound=1' });
+    res.end();
   }
 
   return {
