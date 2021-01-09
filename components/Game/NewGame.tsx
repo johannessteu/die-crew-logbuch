@@ -3,8 +3,26 @@ import qs from 'querystring';
 import * as React from 'react';
 import { useRef, useState } from 'react';
 
-const AttendeeTag: React.FC = ({ children }) => {
-  return <li className="p-4 text-xl text-gray-900">{children}</li>;
+const AttendeeTag: React.FC<{
+  name: string;
+  onRemove: (name: string) => void;
+}> = ({ onRemove, name }) => {
+  return (
+    <li
+      onClick={() => onRemove(name)}
+      className="p-4 text-xl text-gray-900 flex justify-between align-baseline cursor-pointer"
+    >
+      {name}
+      <svg
+        className="fill-current w-6 h-8"
+        focusable="false"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <path d="M14.59 8L12 10.59 9.41 8 8 9.41 10.59 12 8 14.59 9.41 16 12 13.41 14.59 16 16 14.59 13.41 12 16 9.41 14.59 8zM12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+      </svg>
+    </li>
+  );
 };
 
 const NewGame: React.FC = () => {
@@ -41,6 +59,10 @@ const NewGame: React.FC = () => {
     setAttendees([...attendees, newAttendee]);
     setNewAttendee('');
     newAttendeeRef.current.focus();
+  };
+
+  const handleRemoveCrewMember = (name: string) => {
+    setAttendees(attendees.filter((a) => a !== name));
   };
 
   return (
@@ -92,8 +114,13 @@ const NewGame: React.FC = () => {
 
           <div className="bg-white rounded-md md:w-2/3 mb-6">
             <ul className="divide-y divide-gray-300 ">
-              {attendees.map((attendee) => (
-                <AttendeeTag key={attendee}>{attendee}</AttendeeTag>
+              {attendees.map((attendee, idx) => (
+                <AttendeeTag
+                  /* eslint-disable-next-line react/no-array-index-key */
+                  key={attendee + idx}
+                  name={attendee}
+                  onRemove={handleRemoveCrewMember}
+                />
               ))}
             </ul>
           </div>

@@ -64,7 +64,7 @@ const ActiveMission: React.FC<{ id: number }> = ({ id }) => {
     activeMission && activeMission.startedAt > Date.now() - 14400000;
 
   return (
-    <div className="flex justify-center mt-6">
+    <div className="flex flex-col md:flex-row justify-center mt-6 lg:w-4/5 md:mx-auto">
       {started ? (
         <>
           <button
@@ -78,16 +78,16 @@ const ActiveMission: React.FC<{ id: number }> = ({ id }) => {
                 },
               })
             }
-            className="btn btn-primary btn-small bg-green-700 mr-3"
+            className="btn btn-primary btn-small bg-green-700 w-11/12 m-auto mb-3 md:mb-0 md:mr-3"
           >
-            Erfolgreich abgeschlossen
+            Erfolgreich <span className="hidden xl:inline">abgeschlossen</span>
           </button>
           <button
             type="button"
             onClick={() =>
               action({ type: 'RETRY_MISSION', payload: { mission: id } })
             }
-            className="btn btn-primary btn-small bg-red-400"
+            className="btn btn-primary btn-small bg-red-400 w-11/12 m-auto"
           >
             Fehlgeschlagen
           </button>
@@ -263,7 +263,7 @@ const Mission: React.FC<{
                 </span>
                 <p>{gameMission.note || 'keine'}</p>
               </div>
-              <div className="md:w-1/3 mt-4 md:mt-0">
+              <div className="w-full md:w-1/3 mt-4 md:mt-0">
                 <span className="mb-1 inline-block uppercase">Notizen</span>
                 {active && thisMission.startedAt !== null ? (
                   <MissionNotes
