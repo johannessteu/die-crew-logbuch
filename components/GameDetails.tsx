@@ -12,19 +12,19 @@ const GameDetails: React.FC = () => {
 
   return (
     <div className="flex flex-col md:flex-row md:justify-between">
-      <TransparentBox>
+      <TransparentBox key="member">
         <h3>Crewmitglieder</h3>
-        {game.player.map((p) => (
-          <p key={p}>{p}</p>
+        {game.player.map((p, idx) => (
+          <p key={idx}>{p}</p>
         ))}
       </TransparentBox>
-      <TransparentBox>
+      <TransparentBox key="game">
         <h3>Spielstand</h3>
         Aktuelle Mission: {game.currentMission}
         <br />
         Gesamte Spielzeit: {toTimeString(Math.ceil(time / 1000))}
       </TransparentBox>
-      <TransparentBox>
+      <TransparentBox key="id">
         <h3>Deine Spiel-ID</h3>
         {game.identifier}
       </TransparentBox>

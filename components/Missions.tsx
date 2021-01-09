@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 import * as React from 'react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useCrewGame } from '../hooks/useCrewGame';
@@ -297,6 +298,21 @@ const Mission: React.FC<{
   );
 };
 
+const MoreRow: React.FC<{ handleClick: () => void }> = ({ handleClick }) => {
+  return (
+    <div className="flex relative -mt-12 p-2" onClick={handleClick}>
+      <div className="w-10 absolute inset-0 flex items-center justify-center h-full">
+        <div className=" h-full w-1 bg-gray-200 pointer-events-none" />
+      </div>
+      <div className="p-4 h-full w-1/2 mx-auto text-center cursor-pointer">
+        <button className="btn border border-gray-400 hover:bg-blue-600 hover:translate-y-0.5 hover:text-white">
+          Weitere Missionen anzeigen
+        </button>
+      </div>
+    </div>
+  );
+};
+
 const Missions: React.FC = () => {
   const [missionsToRender, setMissionsToRender] = useState([1, 50]);
 
@@ -305,36 +321,73 @@ const Missions: React.FC = () => {
     game: { currentMission },
   } = useCrewGame();
 
-  useEffect(() => {
-    const newMissionIds = [];
-    // add all missions in a range of -2 to +2 to the current mission
-    for (let i = currentMission - 2; i < currentMission + 3; i++) {
-      if (newMissionIds.indexOf(i) === -1) {
-        newMissionIds.push(i);
-      }
-    }
-
+  const handleAddMoreMissionsToRender = (newMissionIds: number[]) =>
     setMissionsToRender((prev) => {
       // we need to sort here so the last calculation is easy
       return Array.from(new Set([...prev, ...newMissionIds])).sort(
         (a, b) => a - b
       );
     });
+
+  useEffect(() => {
+    const newMissionIds = [];
+    for (let i = currentMission - 2; i < currentMission + 3; i++) {
+      newMissionIds.push(i);
+    }
+
+    handleAddMoreMissionsToRender(newMissionIds);
   }, [currentMission]);
+
+  const handleShowMoreMissionsBefore = (id: number) => {
+    const newMissionIds = [];
+    for (let i = id - 4; i < id; i++) {
+      if (i > 0) {
+        newMissionIds.push(i);
+      }
+    }
+    handleAddMoreMissionsToRender(newMissionIds);
+  };
+
+  const handleShowMoreMissionsAfter = (id: number) => {
+    const newMissionIds = [];
+    for (let i = id; i < id + 4; i++) {
+      newMissionIds.push(i);
+    }
+    handleAddMoreMissionsToRender(newMissionIds);
+  };
 
   return (
     <div className="flex flex-col w-full">
       {gameMissions
         .filter((g) => missionsToRender.indexOf(g.id) !== -1)
-        .map((m, idx) => (
-          <Mission
-            key={m.id}
-            id={m.id}
-            active={m.id === currentMission}
-            isFirst={idx === 0}
-            isLast={missionsToRender[missionsToRender.length - 1] === m.id}
-          />
-        ))}
+        .map((m, idx, self) => {
+          const isFirst = idx === 0;
+          const isLast = missionsToRender[missionsToRender.length - 1] === m.id;
+
+          const renderPrevious = !isFirst && m.id - 1 > self[idx - 1].id;
+          const renderNext = !isLast && m.id + 1 < self[idx + 1].id;
+
+          return (
+            <div key={`${m.id}mission`}>
+              {!isLast && renderPrevious && (
+                <MoreRow
+                  handleClick={() => handleShowMoreMissionsBefore(m.id)}
+                />
+              )}
+              <Mission
+                id={m.id}
+                active={m.id === currentMission}
+                isFirst={isFirst}
+                isLast={isLast}
+              />
+              {!isFirst && renderNext && (
+                <MoreRow
+                  handleClick={() => handleShowMoreMissionsAfter(m.id)}
+                />
+              )}
+            </div>
+          );
+        })}
     </div>
   );
 };
