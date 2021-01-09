@@ -239,7 +239,11 @@ const Mission: React.FC<{
                     <span className="mb-1 inline-block uppercase">
                       Missionen
                     </span>
-                    <MissionCard>{gameMission.taskCards}</MissionCard>
+                    {gameMission.taskCards === 0 ? (
+                      <p>Keine</p>
+                    ) : (
+                      <MissionCard>{gameMission.taskCards}</MissionCard>
+                    )}
                   </div>
 
                   <div className="flex flex-col">
@@ -248,6 +252,7 @@ const Mission: React.FC<{
                     </span>
 
                     <div className="flex flex-wrap">
+                      {gameMission.taskTokens.length === 0 && <p>Keine</p>}
                       {gameMission.taskTokens.map((token) => (
                         <div
                           key={token}
