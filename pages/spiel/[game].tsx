@@ -31,14 +31,16 @@ const GamePage: React.FC<GamePageInterface> = ({ game, gameMissions }) => {
   return (
     <CrewGameProvider game={game} gameMissions={gameMissions}>
       <HeroSection>
-        <h2 className="font-mono uppercase text-sm tracking-widest font-medium mb-2 inline-block border-b-2 border-red-500">
+        <h4 className="font-mono uppercase text-sm tracking-widest font-medium mb-2 inline-block border-b-2 border-red-500">
           Deine Crew
-        </h2>
-        <h1 className="heroHeadline">{game.crewName}</h1>
-        <GameDetails />
+        </h4>
+        <h1 className="heroHeadline mb-0">{game.crewName}</h1>
       </HeroSection>
-
       <Section bg="white">
+        <GameDetails />
+      </Section>
+      <Section bg="white pt-0">
+        <h3 className="heroHeadline">Logbuch</h3>
         <div className="px-4 sm:p-0">
           {showNotice && game.currentMission < 5 && (
             <CopyNotice onConfirm={() => setConfirmation(true)} />

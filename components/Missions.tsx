@@ -1,8 +1,7 @@
 /* eslint-disable no-plusplus */
 import * as React from 'react';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useCrewGame } from '../hooks/useCrewGame';
-import { GameMissionInterface } from '../interfaces';
 import { getTokenElement, toTimeString } from '../utils/helper';
 
 const Icon = () => (
@@ -18,6 +17,14 @@ const Icon = () => (
     <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
     <path d="M22 4L12 14.01l-3-3" />
   </svg>
+);
+
+export const MissionCard: React.FC = ({ children }) => (
+  <div className="bg-blue-700 p-1 w-16 h-18 rounded text-center">
+    <div className="bg-blue-700 text-white ring-2 ring-white ring-inset p-3 rounded h-full">
+      <span className="font-mono text-2xl ">{children}</span>
+    </div>
+  </div>
 );
 
 const MissionNotes: React.FC<{
@@ -231,13 +238,7 @@ const Mission: React.FC<{
                     <span className="mb-1 inline-block uppercase">
                       Missionen
                     </span>
-                    <div className="bg-blue-700 p-1 w-14 h-18 rounded text-center">
-                      <div className="bg-blue-700 text-white ring-2 ring-white ring-inset p-3 rounded h-full">
-                        <span className="font-mono text-2xl ">
-                          {gameMission.taskCards}
-                        </span>
-                      </div>
-                    </div>
+                    <MissionCard>{gameMission.taskCards}</MissionCard>
                   </div>
 
                   <div className="flex flex-col">

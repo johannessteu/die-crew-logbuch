@@ -6,7 +6,7 @@ const toTimeString = (secNum: number) => {
   const minutes = Math.floor((secNum - hours * 3600) / 60);
 
   return `
-  ${hours > 0 ? `${hours}Stunden und` : ''}${
+  ${hours > 0 ? `${hours} Stunden und` : ''}${
     minutes === 1 ? '1 Minute' : minutes > 1 ? `${minutes} Minuten` : ' -'
   }`;
 };
