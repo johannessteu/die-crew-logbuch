@@ -38,13 +38,16 @@ const GamePage: React.FC<GamePageInterface> = ({ game, gameMissions }) => {
       </HeroSection>
       <Section bg="white">
         <GameDetails />
+        {showNotice && game.currentMission < 5 && (
+          <CopyNotice
+            gameId={game.identifier}
+            onConfirm={() => setConfirmation(true)}
+          />
+        )}
       </Section>
       <Section bg="white pt-0">
         <h3 className="heroHeadline">Logbuch</h3>
         <div className="px-4 sm:p-0">
-          {showNotice && game.currentMission < 5 && (
-            <CopyNotice onConfirm={() => setConfirmation(true)} />
-          )}
           <Missions />
         </div>
       </Section>

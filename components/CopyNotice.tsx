@@ -1,10 +1,13 @@
 import * as React from 'react';
 
-const CopyNotice: React.FC<{ onConfirm: () => void }> = ({ onConfirm }) => {
+const CopyNotice: React.FC<{ gameId: string; onConfirm: () => void }> = ({
+  onConfirm,
+  gameId,
+}) => {
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
     <div
-      className="text-white shadow cursor-pointer px-4 py-4 border-0 rounded relative mb-12 bg-red-500 flex"
+      className="text-white shadow cursor-pointer px-4 py-4 border-0 rounded relative mt-6 bg-red-500 flex"
       onClick={onConfirm}
     >
       <span className="text-xl inline-block mr-3 align-middle">
@@ -18,7 +21,8 @@ const CopyNotice: React.FC<{ onConfirm: () => void }> = ({ onConfirm }) => {
       </span>
       <span className="inline-block align-middle mr-8">
         <b className="capitalize">Achtung!</b> Vergiss bitte nicht dir deine
-        Spiel-ID aufzuschreiben, damit du das Spiel später fortsetzen kannst
+        Spiel-ID <strong>{gameId}</strong> aufzuschreiben, damit du das Spiel
+        später fortsetzen kannst
       </span>
       <button
         type="button"
