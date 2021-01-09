@@ -34,7 +34,7 @@ const StartSection: React.FC = () => {
             <ResumeGame />
           ) : (
             <>
-              <p className="font-sans text-xl mb-10 md:max-w-lg xl:max-w-xl">
+              <p className="font-sans text-lg mb-10 md:max-w-lg xl:max-w-xl">
                 Du willst gemeinsam mit deiner Crew zum 9. Planeten reisen,
                 weißt aber nicht genau wie und wo du deine Reise am besten
                 dokumentieren kannst? Dann bist du hier beim Logbuch genau
