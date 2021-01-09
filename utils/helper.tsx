@@ -7,7 +7,7 @@ const toTimeString = (secNum: number) => {
 
   return `
   ${hours > 0 ? `${hours} Stunden und` : ''}${
-    minutes === 1 ? '1 Minute' : minutes > 1 ? `${minutes} Minuten` : ' -'
+    minutes === 1 ? '1 Minute' : minutes > 1 ? `${minutes} Minuten` : '-'
   }`;
 };
 
