@@ -4,7 +4,7 @@ const CopyNotice: React.FC<{ onConfirm: () => void }> = ({ onConfirm }) => {
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
     <div
-      className="text-white shadow cursor-pointer px-4 py-4 border-0 rounded relative mb-4 bg-red-500 flex"
+      className="text-white shadow cursor-pointer px-4 py-4 border-0 rounded relative mb-12 bg-red-500 flex"
       onClick={onConfirm}
     >
       <span className="text-xl inline-block mr-3 align-middle">

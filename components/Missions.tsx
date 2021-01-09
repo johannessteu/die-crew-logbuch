@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useCrewGame } from '../hooks/useCrewGame';
+import { GameMissionInterface } from '../interfaces';
 import { getTokenElement, toTimeString } from '../utils/helper';
 
 const Icon = () => (
@@ -297,22 +298,43 @@ const Mission: React.FC<{
 };
 
 const Missions: React.FC = () => {
+  const [missionsToRender, setMissionsToRender] = useState([1, 50]);
+
   const {
     gameMissions,
     game: { currentMission },
   } = useCrewGame();
 
+  useEffect(() => {
+    const newMissionIds = [];
+    // add all missions in a range of -2 to +2 to the current mission
+    for (let i = currentMission - 2; i < currentMission + 3; i++) {
+      if (newMissionIds.indexOf(i) === -1) {
+        newMissionIds.push(i);
+      }
+    }
+
+    setMissionsToRender((prev) => {
+      // we need to sort here so the last calculation is easy
+      return Array.from(new Set([...prev, ...newMissionIds])).sort(
+        (a, b) => a - b
+      );
+    });
+  }, [currentMission]);
+
   return (
     <div className="flex flex-col w-full">
-      {gameMissions.map((m, idx) => (
-        <Mission
-          key={m.id}
-          id={m.id}
-          active={m.id === currentMission}
-          isFirst={idx === 0}
-          isLast={idx + 1 === gameMissions.length}
-        />
-      ))}
+      {gameMissions
+        .filter((g) => missionsToRender.indexOf(g.id) !== -1)
+        .map((m, idx) => (
+          <Mission
+            key={m.id}
+            id={m.id}
+            active={m.id === currentMission}
+            isFirst={idx === 0}
+            isLast={missionsToRender[missionsToRender.length - 1] === m.id}
+          />
+        ))}
     </div>
   );
 };
