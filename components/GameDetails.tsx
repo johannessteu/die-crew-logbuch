@@ -29,7 +29,7 @@ const GameDetails: React.FC = () => {
           Spielstand
         </h3>
         <div className="flex">
-          <MissionCard>{game.currentMission}</MissionCard>
+          <MissionCard special={false}>{game.currentMission}</MissionCard>
           <div className="ml-6">
             <p>
               Du hast bisher <br />

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TaskTokenEnum } from '../interfaces';
+import { SpecialNotesEnum, TaskTokenEnum } from '../interfaces';
 
 const toTimeString = (secNum: number) => {
   const hours = Math.floor(secNum / 3600);
@@ -11,6 +11,31 @@ const toTimeString = (secNum: number) => {
   }`;
 };
 
+export const getSpecialMissionNotes = (
+  otherNote: string,
+  notes: SpecialNotesEnum[],
+  after?: number
+): JSX.Element => {
+  const text = notes.map((n) => {
+    if (n === SpecialNotesEnum.RADIO_INTERFERENCE && after) {
+      return SpecialNotesEnum.RADIO_INTERFERENCE.replace(
+        'xx',
+        after.toString()
+      );
+    }
+
+    return n;
+  });
+
+  text.push(otherNote);
+
+  if (text.length === 0) {
+    return <p>keine</p>;
+  }
+
+  return <p>{text.join(' ')}</p>;
+};
+
 const getTokenElement = (token: TaskTokenEnum): JSX.Element => {
   switch (token) {
     case TaskTokenEnum.TOKEN_FIRST:
@@ -19,6 +44,10 @@ const getTokenElement = (token: TaskTokenEnum): JSX.Element => {
       return <span className="font-mono text-2xl">2</span>;
     case TaskTokenEnum.TOKEN_THIRD:
       return <span className="font-mono text-2xl">3</span>;
+    case TaskTokenEnum.TOKEN_FOURTH:
+      return <span className="font-mono text-2xl">4</span>;
+    case TaskTokenEnum.TOKEN_FIFTH:
+      return <span className="font-mono text-2xl">5</span>;
     case TaskTokenEnum.TOKEN_LAST:
       return <span className="font-mono text-2xl">&Omega;</span>;
     case TaskTokenEnum.TOKEN_BEFORE_1:

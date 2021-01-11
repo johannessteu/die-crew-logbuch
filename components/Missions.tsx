@@ -2,7 +2,11 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { useCrewGame } from '../hooks/useCrewGame';
-import { getTokenElement, toTimeString } from '../utils/helper';
+import {
+  getSpecialMissionNotes,
+  getTokenElement,
+  toTimeString,
+} from '../utils/helper';
 
 const Icon = () => (
   <svg
@@ -19,9 +23,16 @@ const Icon = () => (
   </svg>
 );
 
-export const MissionCard: React.FC = ({ children }) => (
+export const MissionCard: React.FC<{ special: boolean }> = ({
+  special,
+  children,
+}) => (
   <div className="bg-blue-700 p-1 w-16 h-18 rounded text-center">
-    <div className="bg-blue-700 text-white ring-2 ring-white ring-inset p-3 rounded h-full">
+    <div
+      className={`bg-blue-700 text-white ring-inset p-3 rounded h-full ${
+        special ? 'ring-4 ring-yellow-400' : 'ring-2 ring-white'
+      }`}
+    >
       <span className="font-mono text-2xl ">{children}</span>
     </div>
   </div>
@@ -242,7 +253,9 @@ const Mission: React.FC<{
                     {gameMission.taskCards === 0 ? (
                       <p>Keine</p>
                     ) : (
-                      <MissionCard>{gameMission.taskCards}</MissionCard>
+                      <MissionCard special={gameMission.specialRule || false}>
+                        {gameMission.taskCards}
+                      </MissionCard>
                     )}
                   </div>
 
@@ -266,11 +279,14 @@ const Mission: React.FC<{
                     </div>
                   </div>
                 </div>
-
                 <span className="inline-block mt-8 uppercase">
                   Zusätzliche Aufgabe:
                 </span>
-                <p>{gameMission.note || 'keine'}</p>
+                {getSpecialMissionNotes(
+                  gameMission.note,
+                  gameMission.taskNotes,
+                  gameMission.radioInterferenceAfter
+                )}
               </div>
               <div className="w-full md:w-1/3 mt-4 md:mt-0">
                 <span className="mb-1 inline-block uppercase">Notizen</span>
@@ -312,7 +328,10 @@ const MoreRow: React.FC<{ handleClick: () => void }> = ({ handleClick }) => {
         <div className=" h-full w-1 bg-gray-200 pointer-events-none" />
       </div>
       <div className="p-4 h-full w-1/2 mx-auto text-center cursor-pointer">
-        <button className="btn border border-gray-400 hover:bg-blue-600 hover:translate-y-0.5 hover:text-white">
+        <button
+          type="button"
+          className="btn border border-gray-400 hover:bg-blue-600 hover:translate-y-0.5 hover:text-white"
+        >
           Weitere Missionen anzeigen
         </button>
       </div>
