@@ -7,8 +7,8 @@ export default function Home() {
     <>
       <StartSection />
       <Section bg="bg-gray-200">
-        <div className="flex px-5">
-          <div className="w-1/3 lg:max-w-md sm:visible mr-6">
+        <div className="flex flex-col md:flex-row px-5">
+          <div className="w-4/5 xs:w-4/6 md:w-1/3 mx-auto md:mx-0 mb-6 md:mb-0 md:mr-6 text-center md:w-1/3 lg:max-w-md sm:visible">
             <Image
               src="/die-crew.png"
               alt="Die Crew"
@@ -16,7 +16,7 @@ export default function Home() {
               height={400}
             />
           </div>
-          <div className="flex-1">
+          <div className="flex-1 w-full md:w-auto">
             <span className="font-mono uppercase">
               Kennerspiel des Jahres 2020
             </span>
@@ -47,7 +47,7 @@ export default function Home() {
               Youtube-Tutorials an!
             </p>
             <iframe
-              width="560"
+              width="100%"
               height="315"
               src="https://www.youtube-nocookie.com/embed/6KsSq1kbnBo"
               frameBorder="0"
