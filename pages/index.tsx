@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import Image from 'next/image';
 import Section from '../components/Sections/Section';
 import StartSection from '../components/Sections/StartSection';
@@ -5,6 +6,21 @@ import StartSection from '../components/Sections/StartSection';
 export default function Home() {
   return (
     <>
+      <Head>
+        <title>Die Crew - das digitale Logbuch</title>
+        <meta
+          name="description"
+          content="
+          Benutze jetzt die digitale Version des Logbuchs für das Spiel 'Die
+          Crew'. Starte einfach jederzeit ein neues Spiel!"
+        />
+        <meta
+          property="og:title"
+          content="Die Crew - das digitale Logbuch"
+          key="title"
+        />
+        <meta name="robots" content="index, follow" />
+      </Head>
       <StartSection />
       <Section bg="bg-gray-200">
         <div className="flex flex-col md:flex-row px-5">
