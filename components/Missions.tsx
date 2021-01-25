@@ -68,13 +68,28 @@ const MissionNotes: React.FC<{
   );
 };
 
-const ActiveMission: React.FC<{ id: number }> = ({ id }) => {
+const ActiveMission: React.FC<{ id: number; onRetry: () => void }> = ({
+  id,
+  onRetry,
+}) => {
   const {
     game: { missions },
     action,
   } = useCrewGame();
+  const [restartMission, setRestartMission] = useState(false);
 
   const activeMission = missions.find((m) => m.mission === id);
+
+  // eslint-disable-next-line consistent-return
+  useEffect(() => {
+    if (restartMission === true) {
+      const restartTimeout = setTimeout(() => {
+        setRestartMission(false);
+      }, 3000);
+
+      return () => clearTimeout(restartTimeout);
+    }
+  }, [restartMission]);
 
   // A mission is considered as started if it is
   //  - the active Mission
@@ -104,12 +119,39 @@ const ActiveMission: React.FC<{ id: number }> = ({ id }) => {
           </button>
           <button
             type="button"
-            onClick={() =>
-              action({ type: 'RETRY_MISSION', payload: { mission: id } })
-            }
-            className="btn btn-primary btn-small bg-red-400 w-11/12 m-auto"
+            onClick={() => {
+              action({ type: 'RETRY_MISSION', payload: { mission: id } });
+              setRestartMission(true);
+              onRetry();
+            }}
+            disabled={restartMission}
+            className={`btn btn-primary btn-small w-11/12 m-auto flex justify-center ${
+              restartMission ? 'bg-gray-600' : 'bg-red-400'
+            }`}
           >
-            Fehlgeschlagen
+            {restartMission && (
+              <svg
+                className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                />
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                />
+              </svg>
+            )}
+            {restartMission ? 'Nächster Versuch!' : 'Fehlgeschlagen'}
           </button>
         </>
       ) : (
@@ -143,7 +185,7 @@ const Mission: React.FC<{
 }> = ({ id, isFirst, isLast, active }) => {
   const [collapsed, setCollapsed] = useState(!active);
   const [alreadyPlayed, setAlreadyPlayed] = useState(false);
-
+  const [animatePing, setAnimatePing] = useState(false);
   const {
     game: { missions },
     gameMissions,
@@ -152,12 +194,23 @@ const Mission: React.FC<{
 
   const thisMission = missions.find((m) => m.mission === id);
   const gameMission = gameMissions.find((g) => g.id === id);
-  const took = useEffect(() => {
+
+  useEffect(() => {
     setCollapsed(!active);
     setAlreadyPlayed(
       !active && missions.find((m) => m.mission === id) !== undefined
     );
   }, [active, id, missions]);
+
+  // eslint-disable-next-line consistent-return
+  useEffect(() => {
+    if (animatePing === true) {
+      const timeout = setTimeout(() => {
+        setAnimatePing(false);
+      }, 3000);
+      return () => clearTimeout(timeout);
+    }
+  }, [animatePing]);
 
   return (
     <div className="flex relative pb-12">
@@ -191,8 +244,8 @@ const Mission: React.FC<{
           <div className="flex">
             {thisMission && (
               <div className="flex md:2 md:mr-10">
-                <div className="flex items-center mr-4 md:mr-9 w-12">
-                  <div className="bg-white p-1 inline-block rounded border border-gray-300 mr-2">
+                <div className="flex relative items-center mr-4 md:mr-9 w-12">
+                  <div className="bg-white p-1 relative inline-block rounded border border-gray-300 mr-2">
                     <svg
                       className="w-5 h-5"
                       focusable="false"
@@ -202,6 +255,9 @@ const Mission: React.FC<{
                       <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z" />
                     </svg>
                   </div>{' '}
+                  {animatePing && (
+                    <span className="animate-ping absolute inline-flex h-8 w-8 rounded-full bg-red-600 opacity-75" />
+                  )}
                   {thisMission.trials}
                 </div>
 
@@ -313,7 +369,9 @@ const Mission: React.FC<{
               </div>
             </div>
 
-            {active && <ActiveMission id={id} />}
+            {active && (
+              <ActiveMission onRetry={() => setAnimatePing(true)} id={id} />
+            )}
           </div>
         )}
       </div>

@@ -22,10 +22,12 @@ const StartSection: React.FC = () => {
   return (
     <HeroSection>
       <div className="text-left w-full text-white">
-        <h2 className="font-mono uppercase text-sm tracking-widest font-medium mb-2 inline-block border-b-2 border-red-500">
-          Die Crew
-        </h2>
-        <h1 className="heroHeadline">Das Logbuch</h1>
+        <h1 className="heroHeadline">
+          <span className="font-mono uppercase text-sm tracking-widest font-medium mb-2 inline-block border-b-2 border-red-500">
+            Die Crew
+          </span>
+          <span className="block">Das digitale Logbuch</span>
+        </h1>
 
         <TransparentBox className="md:w-10/12 xl:w-2/3 max-w-2xl">
           {viewMode === 'NEW' ? (
@@ -35,11 +37,12 @@ const StartSection: React.FC = () => {
           ) : (
             <>
               <p className="font-sans text-lg mb-10 md:max-w-lg xl:max-w-xl">
-                Du willst gemeinsam mit deiner Crew zum 9. Planeten reisen,
-                weißt aber nicht genau wie und wo du deine Reise am besten
-                dokumentieren kannst? Dann bist du hier beim Logbuch genau
-                richtig. Starte jetzt eine neue Reise oder setze deine bisherige
-                Reise weiter fort und dokumentiere deinen Spielfortschritt!
+                Dich hat das Kennerspiel des Jahres 2020 gepackt und nun
+                möchtest du mit deiner Crew zum 9. Planeten reisen, weißt aber
+                nicht genau wie und wo du deine Reise am besten dokumentieren
+                kannst? Das Dann bist du hier beim Logbuch genau richtig. Starte
+                jetzt eine neue Reise oder setze deine bisherige Reise weiter
+                fort!
               </p>{' '}
               <div className="flex flex-col md:flex-row">
                 <button

@@ -20,23 +20,24 @@ export default function Home() {
             <span className="font-mono uppercase">
               Kennerspiel des Jahres 2020
             </span>
-            <h1 className="text-3xl mb-6">Die Crew</h1>
+            <h2 className="text-3xl mb-6">Das Spiel</h2>
             <p>
               Das Spiel "Die Crew" ist ein kooperatives Kartenspiel, dass im
               KOSMOS-Verlag erschienen ist. Bei diesem Stichspiel geht es darum
               im Team verteilte Aufgaben zu bewältigen. Der Clou: Ihr dürft
-              dabei nicht miteinander kommunizieren. Hier liegt der Reiz in dem
-              Spiel. Ihr gewinnt und verliert gemeinsam. 2020 wurde es mit der
-              Auszeichnung Diese Crew begibt sich "Kennerspiel des Jahres 2020"
-              geehrt.
+              dabei nicht miteinander kommunizieren. Genau hier liegt der Reiz
+              in dem Spiel. Ihr gewinnt und verliert gemeinsam als eine Crew.
+              2020 wurde das Spiel mit der Auszeichnung "Kennerspiel des Jahres
+              2020" geehrt.
             </p>
             <p className="mt-3">
               Als Crew begebt ihr euch bei dem Spiel auf die Reise zum 9.
               Planeten. Euren Spielfortschritt könnt ihr im Logbuch notieren.
               Allerdigns müsst ihr dafür das Logbuch, dass im Spiel beigelegt
-              ist, beschriften. Daher findet ihr hier eine digitale Version des
-              Logbuchs. Startet einfach ein neues Spiel und schon kannes
-              losgehen!
+              ist, beschriften. So seit ihr auch limitiert mit wie vielen Leuten
+              ihr die Reise zum 9. Planeten begehen wollt.Daher findet ihr hier
+              eine digitale Version des Logbuchs. Startet einfach ein neues
+              Spiel und schon kann es losgehen!
             </p>
 
             <h3 className=" mt-8 mb-3 text-xl font-mono uppercase">

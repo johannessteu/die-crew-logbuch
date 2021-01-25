@@ -7,7 +7,7 @@ const CopyNotice: React.FC<{ gameId: string; onConfirm: () => void }> = ({
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
     <div
-      className="text-white shadow cursor-pointer px-4 py-4 border-0 rounded relative mt-6 bg-red-500 flex"
+      className="text-white shadow cursor-pointer mx-4 sd:-mx-4 px-4 py-4 border-0 rounded relative mt-6 bg-red-500 flex"
       onClick={onConfirm}
     >
       <span className="text-xl inline-block mr-3 align-middle">

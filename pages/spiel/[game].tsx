@@ -46,7 +46,7 @@ const GamePage: React.FC<GamePageInterface> = ({ game, gameMissions }) => {
         )}
       </Section>
       <Section bg="white pt-0">
-        <h3 className="heroHeadline">Logbuch</h3>
+        <h3 className="heroHeadline px-4 sm:px-0">Logbuch</h3>
         <div className="px-4 sm:p-0">
           <Missions />
         </div>
