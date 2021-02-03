@@ -44,7 +44,10 @@ const ResumeGame: React.FC = () => {
           </h3>
           <ul>
             {crewGames.map((g) => (
-              <li className="bg-gray-200 bg-opacity-40 rounded mb-2 hover:bg-opacity-60">
+              <li
+                key={g.identifier}
+                className="bg-gray-200 bg-opacity-40 rounded mb-2 hover:bg-opacity-60"
+              >
                 <a
                   className="p-3 flex align-baseline flex-col sm:flex-row"
                   href={`/spiel/${g.identifier}`}

@@ -23,9 +23,19 @@ const GamePage: React.FC<GamePageInterface> = ({ game, gameMissions }) => {
     `crew-${game.identifier}`,
     false
   );
+  const [crewGames, setCrewGames] = useLocalStorage<
+    { identifier: string; crew: string }[]
+  >('crew-games', []);
 
   useEffect(() => {
     setShowNotice(!confirmed);
+
+    if (!crewGames.find((e) => e.identifier === game.identifier)) {
+      setCrewGames([
+        ...crewGames,
+        { identifier: game.identifier, crew: game.crewName },
+      ]);
+    }
   }, [confirmed]);
 
   return (

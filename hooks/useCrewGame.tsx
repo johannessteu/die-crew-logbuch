@@ -74,6 +74,7 @@ const reducer = (prev: GameInterface, action: Action): GameInterface => {
           {
             ...currentMission,
             trials: currentMission.trials - 1,
+            took: null,
             startedAt: null,
           },
         ],
