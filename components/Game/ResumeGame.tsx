@@ -1,13 +1,17 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import * as React from 'react';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 const ResumeGame: React.FC = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [gameIdentifier, setGameIdentifier] = useState('');
-
   const { notfound } = router.query;
+  const [crewGames] = useLocalStorage<{ identifier: string; crew: string }[]>(
+    'crew-games',
+    []
+  );
 
   const handleResume = () => {
     setLoading(true);
@@ -32,10 +36,33 @@ const ResumeGame: React.FC = () => {
           </span>
         </div>
       )}
+
+      {crewGames.length > 0 && (
+        <div className="flex flex-col md:mb-4">
+          <h3 className="block font-mono mb-2 text-md">
+            Welches Spiel möchtest du fortsetzen?
+          </h3>
+          <ul>
+            {crewGames.map((g) => (
+              <li className="bg-gray-200 bg-opacity-40 rounded mb-2 hover:bg-opacity-60">
+                <a
+                  className="p-3 flex align-baseline flex-col sm:flex-row"
+                  href={`/spiel/${g.identifier}`}
+                >
+                  <span className="font-mono inline-block w-16 mb-2 sm:border-b-0 sm:mb-0 sm:mr-3 border-b-2 border-red-500">
+                    {g.identifier}
+                  </span>
+                  <span className="font-mono">{g.crew}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       <div className="flex flex-col md:flex-row md:items-end md:mb-4">
         <div className="md:flex-grow flex items-stretch flex-col mb: mr-3">
           <label htmlFor="gameId" className="block font-mono mb-2 text-md">
-            Gib deine Spiel-ID ein
+            {crewGames.length > 0 ? 'Oder gib' : 'Gib'} deine Spiel-ID ein
           </label>
           <input
             id="gameId"

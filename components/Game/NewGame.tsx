@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import qs from 'querystring';
 import * as React from 'react';
 import { useRef, useState } from 'react';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 const AttendeeTag: React.FC<{
   name: string;
@@ -32,6 +33,9 @@ const NewGame: React.FC = () => {
   const [crewName, setCrewName] = useState('');
   const [newAttendee, setNewAttendee] = useState('');
   const [attendees, setAttendees] = useState<string[]>([]);
+  const [crewGames, setGames] = useLocalStorage<
+    { identifier: string; crew: string }[]
+  >('crew-games', []);
 
   const handleCreateGame = async () => {
     setLoading(true);
@@ -42,6 +46,8 @@ const NewGame: React.FC = () => {
         crewName,
       })}`
     ).then((r) => r.json());
+
+    setGames([...crewGames, { identifier: res.identifier, crew: crewName }]);
 
     // Give firebase some time
     setTimeout(() => {

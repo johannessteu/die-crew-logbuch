@@ -5,6 +5,7 @@ import {
   useContext,
   useEffect,
   useReducer,
+  useState,
 } from 'react';
 import { GameInterface, GameMissionInterface } from '../interfaces';
 
@@ -12,6 +13,11 @@ interface ContextInterface {
   game: GameInterface;
   gameMissions: GameMissionInterface[];
   action: Dispatch<Action>;
+  settings: {
+    autostart: boolean;
+    enableAutostart: () => void;
+    disableAutostart: () => void;
+  };
 }
 
 const GameContext = createContext<ContextInterface | undefined>(undefined);
@@ -29,6 +35,7 @@ const useCrewGame = (): ContextInterface => {
 type Action =
   | { type: 'START_MISSION'; payload: { mission: number } }
   | { type: 'RETRY_MISSION'; payload: { mission: number } }
+  | { type: 'CANCEL_MISSION'; payload: { mission: number } }
   | { type: 'ADD_NOTE'; payload: { mission: number; note: string } }
   | {
       type: 'FINISH_MISSION';
@@ -56,6 +63,18 @@ const reducer = (prev: GameInterface, action: Action): GameInterface => {
             ...currentMission,
             trials: currentMission.trials + 1,
             startedAt: Date.now(),
+          },
+        ],
+      };
+    case 'CANCEL_MISSION':
+      return {
+        ...prev,
+        missions: [
+          ...otherMissions,
+          {
+            ...currentMission,
+            trials: currentMission.trials - 1,
+            startedAt: null,
           },
         ],
       };
@@ -120,6 +139,7 @@ const CrewGameProvider: React.FC<{
     Reducer<GameInterface, Action>,
     GameInterface
   >(reducer, game, undefined);
+  const [autostart, setAutostart] = useState(false);
 
   useEffect(() => {
     const id = setTimeout(async () => {
@@ -138,7 +158,16 @@ const CrewGameProvider: React.FC<{
 
   return (
     <GameContext.Provider
-      value={{ gameMissions, game: state, action: dispatch }}
+      value={{
+        gameMissions,
+        game: state,
+        action: dispatch,
+        settings: {
+          autostart,
+          disableAutostart: () => setAutostart(false),
+          enableAutostart: () => setAutostart(true),
+        },
+      }}
     >
       {children}
     </GameContext.Provider>

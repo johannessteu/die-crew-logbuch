@@ -1,6 +1,6 @@
 /* eslint-disable no-plusplus */
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useCrewGame } from '../hooks/useCrewGame';
 import {
   getSpecialMissionNotes,
@@ -75,13 +75,39 @@ const ActiveMission: React.FC<{ id: number; onRetry: () => void }> = ({
   const {
     game: { missions },
     action,
+    settings: { enableAutostart, disableAutostart, autostart },
   } = useCrewGame();
   const [restartMission, setRestartMission] = useState(false);
+  const [counter, setCounter] = useState(0);
 
   const activeMission = missions.find((m) => m.mission === id);
 
   // eslint-disable-next-line consistent-return
   useEffect(() => {
+    // Set autostart timer and start the mission after 5 seconds
+    if (autostart && activeMission.startedAt === null) {
+      setCounter(5);
+      const autostartTimeout = setTimeout(() => {
+        action({ type: 'START_MISSION', payload: { mission: id } });
+      }, 5000);
+
+      return () => clearTimeout(autostartTimeout);
+    }
+  }, [action, activeMission.startedAt, autostart, id]);
+
+  // eslint-disable-next-line consistent-return
+  useEffect(() => {
+    // update counter value
+    if (counter > 0) {
+      const counterTimeout = setTimeout(() => setCounter(counter - 1), 1000);
+
+      return () => clearTimeout(counterTimeout);
+    }
+  }, [counter]);
+
+  // eslint-disable-next-line consistent-return
+  useEffect(() => {
+    // restart the mission
     if (restartMission === true) {
       const restartTimeout = setTimeout(() => {
         setRestartMission(false);
@@ -99,81 +125,115 @@ const ActiveMission: React.FC<{ id: number; onRetry: () => void }> = ({
     activeMission && activeMission.startedAt > Date.now() - 14400000;
 
   return (
-    <div className="flex flex-col md:flex-row justify-center mt-6 lg:w-4/5 md:mx-auto">
-      {started ? (
-        <>
-          <button
-            type="button"
-            onClick={() =>
-              action({
-                type: 'FINISH_MISSION',
-                payload: {
-                  mission: id,
-                  distressSignalUsed: false,
-                },
-              })
-            }
-            className="btn btn-primary btn-small bg-green-700 w-11/12 m-auto mb-3 md:mb-0 md:mr-3"
-          >
-            Erfolgreich <span className="hidden xl:inline">abgeschlossen</span>
-          </button>
+    <>
+      <div className="flex flex-col md:flex-row justify-center mt-6 lg:w-4/5 md:mx-auto">
+        {started ? (
+          <>
+            <button
+              type="button"
+              onClick={() =>
+                action({
+                  type: 'FINISH_MISSION',
+                  payload: {
+                    mission: id,
+                    distressSignalUsed: false,
+                  },
+                })
+              }
+              className="btn btn-primary btn-small bg-green-700 w-11/12 m-auto mb-3 md:mb-0 md:mr-3"
+            >
+              Erfolgreich{' '}
+              <span className="hidden xl:inline">abgeschlossen</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                action({ type: 'RETRY_MISSION', payload: { mission: id } });
+                setRestartMission(true);
+                onRetry();
+              }}
+              disabled={restartMission}
+              className={`btn btn-primary btn-small w-11/12 m-auto flex justify-center ${
+                restartMission ? 'bg-gray-600' : 'bg-red-400'
+              }`}
+            >
+              {restartMission && (
+                <svg
+                  className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  />
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  />
+                </svg>
+              )}
+              {restartMission ? 'Nächster Versuch!' : 'Fehlgeschlagen'}
+            </button>
+          </>
+        ) : autostart ? (
+          <div className="flex flex-col md:flex-row justify-center mt-6 lg:w-4/5 md:mx-auto">
+            <button
+              type="button"
+              className="md:mr-3 mb-3 md:mb-0 btn btn-primary btn-small flex"
+            >
+              🚀 Mission startet in {counter}
+            </button>
+            <button
+              onClick={() => {
+                setCounter(0);
+                disableAutostart();
+              }}
+              type="button"
+              className="btn btn-secondary btn-small flex"
+            >
+              Automatischen Start abbrechen
+            </button>
+          </div>
+        ) : (
           <button
             type="button"
             onClick={() => {
-              action({ type: 'RETRY_MISSION', payload: { mission: id } });
-              setRestartMission(true);
-              onRetry();
+              action({ type: 'START_MISSION', payload: { mission: id } });
+              enableAutostart();
             }}
-            disabled={restartMission}
-            className={`btn btn-primary btn-small w-11/12 m-auto flex justify-center ${
-              restartMission ? 'bg-gray-600' : 'bg-red-400'
-            }`}
+            className="btn btn-primary btn-small flex"
           >
-            {restartMission && (
-              <svg
-                className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                />
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                />
-              </svg>
-            )}
-            {restartMission ? 'Nächster Versuch!' : 'Fehlgeschlagen'}
+            <svg
+              className="w-5 h-5 mr-2 text-white fill-current"
+              focusable="false"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+            </svg>
+            Mission starten
           </button>
-        </>
-      ) : (
-        <button
-          type="button"
-          onClick={() =>
-            action({ type: 'START_MISSION', payload: { mission: id } })
-          }
-          className="btn btn-primary btn-small flex"
+        )}
+      </div>
+      {started && (
+        <span
+          className="mt-4 block text-center text-gray-500 cursor-pointer"
+          onClick={() => {
+            disableAutostart();
+            action({ type: 'CANCEL_MISSION', payload: { mission: id } });
+          }}
         >
-          <svg
-            className="w-5 h-5 mr-2 text-white fill-current"
-            focusable="false"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
-          </svg>
-          Mission starten
-        </button>
+          Mission abbrechen
+        </span>
       )}
-    </div>
+    </>
   );
 };
 
@@ -183,9 +243,12 @@ const Mission: React.FC<{
   isLast: boolean;
   isFirst: boolean;
 }> = ({ id, isFirst, isLast, active }) => {
+  const ref = useRef<HTMLDivElement>();
   const [collapsed, setCollapsed] = useState(!active);
   const [alreadyPlayed, setAlreadyPlayed] = useState(false);
   const [animatePing, setAnimatePing] = useState(false);
+  const [playedTime, setPlayedTime] = useState(0);
+
   const {
     game: { missions },
     gameMissions,
@@ -194,6 +257,28 @@ const Mission: React.FC<{
 
   const thisMission = missions.find((m) => m.mission === id);
   const gameMission = gameMissions.find((g) => g.id === id);
+
+  useEffect(() => {
+    // scroll active mission into view
+    if (active) {
+      ref.current.scrollIntoView({
+        behavior: 'smooth',
+      });
+    }
+  }, [active]);
+
+  // eslint-disable-next-line consistent-return
+  useEffect(() => {
+    if (active && thisMission.startedAt) {
+      setPlayedTime(Date.now() - thisMission.startedAt);
+
+      const interval = setInterval(() => {
+        setPlayedTime(Date.now() - thisMission.startedAt);
+      }, 10000);
+
+      return () => clearInterval(interval);
+    }
+  }, [active, thisMission]);
 
   useEffect(() => {
     setCollapsed(!active);
@@ -213,7 +298,7 @@ const Mission: React.FC<{
   }, [animatePing]);
 
   return (
-    <div className="flex relative pb-12">
+    <div ref={ref} className="flex relative pb-12">
       <div
         className={`w-10 absolute inset-0 flex items-center justify-center ${
           isLast ? 'h-2' : 'h-full'
@@ -272,7 +357,11 @@ const Mission: React.FC<{
                       <path d="M15 1H9v2h6V1zm-4 13h2V8h-2v6zm8.03-6.61l1.42-1.42c-.43-.51-.9-.99-1.41-1.41l-1.42 1.42C16.07 4.74 14.12 4 12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9 9-4.03 9-9c0-2.12-.74-4.07-1.97-5.61zM12 20c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z" />
                     </svg>
                   </div>
-                  {thisMission.took < 60 * 1000
+                  {active
+                    ? playedTime < 60 * 1000
+                      ? `${Math.round(playedTime / 1000)} Sekunden`
+                      : toTimeString(playedTime / 1000)
+                    : thisMission.took < 60 * 1000
                     ? `${Math.round(thisMission.took / 1000)} Sekunden`
                     : toTimeString(thisMission.took / 1000)}
                 </div>
@@ -412,6 +501,17 @@ const Missions: React.FC = () => {
         (a, b) => a - b
       );
     });
+
+  useEffect(() => {
+    // force rerender after 5 played missions
+    if (currentMission % 5 === 0) {
+      const newMissionIds = [1, 50];
+      for (let i = currentMission - 2; i < currentMission + 3; i++) {
+        newMissionIds.push(i);
+      }
+      setMissionsToRender(newMissionIds);
+    }
+  }, [currentMission]);
 
   useEffect(() => {
     const newMissionIds = [];
