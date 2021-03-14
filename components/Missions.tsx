@@ -549,7 +549,9 @@ const Missions: React.FC = () => {
           const isLast = missionsToRender[missionsToRender.length - 1] === m.id;
 
           const renderPrevious = !isFirst && m.id - 1 > self[idx - 1].id;
-          const renderNext = !isLast && m.id + 1 < self[idx + 1].id;
+          const renderNext = self[idx + 1]
+            ? !isLast && m.id + 1 < self[idx + 1].id
+            : false;
 
           return (
             <div key={`${m.id}mission`}>
