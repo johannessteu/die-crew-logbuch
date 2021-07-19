@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import { useCrewGame } from '../hooks/useCrewGame';
 import { toTimeString } from '../utils/helper';
 import { MissionCard } from './Missions';
@@ -31,10 +32,7 @@ const GameDetails: React.FC = () => {
         <div className="flex">
           <MissionCard special={false}>{game.currentMission}</MissionCard>
           <div className="ml-6">
-            <p>
-              Du hast bisher <br />
-              {toTimeString(time)} gespielt
-            </p>
+            <p>{`Du hast bisher <br /> ${toTimeString(time)} gespielt`}</p>
           </div>
         </div>
       </div>

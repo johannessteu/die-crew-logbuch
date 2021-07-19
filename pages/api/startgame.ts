@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+
 import { GameInterface } from '../../interfaces';
 import db from '../../utils/firestoreDb';
 

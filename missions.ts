@@ -35,8 +35,7 @@ export const missions: GameMissionInterface[] = [
   },
   {
     id: 5,
-    note:
-      'Der Kommandant fragt jedem nach seinem Befinden. Geantwortet mit "gut" oder "schlecht". Der Kommandant entscheidet wer krank ist. Diese Person darf keinen einzigen Stich gewinnen.',
+    note: 'Der Kommandant fragt jedem nach seinem Befinden. Geantwortet mit "gut" oder "schlecht". Der Kommandant entscheidet wer krank ist. Diese Person darf keinen einzigen Stich gewinnen.',
     taskCards: 0,
     taskTokens: [],
     taskNotes: [],
@@ -82,16 +81,14 @@ export const missions: GameMissionInterface[] = [
   },
   {
     id: 11,
-    note:
-      'Ein Crewmitglied kann nicht kommunizieren. Der Kommandant bestimmt das Crewmitglied.',
+    note: 'Ein Crewmitglied kann nicht kommunizieren. Der Kommandant bestimmt das Crewmitglied.',
     taskCards: 4,
     taskTokens: [TaskTokenEnum.TOKEN_FIRST],
     taskNotes: [],
   },
   {
     id: 12,
-    note:
-      'Nach dem 1. Stich muss jeder eine zufällige Karte des Crewmitglieds rechts von sich ziehen.',
+    note: 'Nach dem 1. Stich muss jeder eine zufällige Karte des Crewmitglieds rechts von sich ziehen.',
     taskCards: 4,
     taskTokens: [TaskTokenEnum.TOKEN_LAST],
     taskNotes: [],
@@ -184,8 +181,7 @@ export const missions: GameMissionInterface[] = [
   },
   {
     id: 23,
-    note:
-      'Bevor die Aufträge verteilt werden dürft ihr zwei Auftragsplättchen tauschen. Entscheidet gemeinsam, aber verratet nichts über eure Handkarten.',
+    note: 'Bevor die Aufträge verteilt werden dürft ihr zwei Auftragsplättchen tauschen. Entscheidet gemeinsam, aber verratet nichts über eure Handkarten.',
     taskCards: 5,
     taskTokens: [
       TaskTokenEnum.TOKEN_FIRST,
@@ -205,8 +201,7 @@ export const missions: GameMissionInterface[] = [
   },
   {
     id: 25,
-    note:
-      'Spielt ihr zu fünft darf ab jetzt die Zusatzregel für 5 Crewmitglieder genutzt werden.',
+    note: 'Spielt ihr zu fünft darf ab jetzt die Zusatzregel für 5 Crewmitglieder genutzt werden.',
     taskCards: 6,
     taskTokens: [TaskTokenEnum.TOKEN_BEFORE_1, TaskTokenEnum.TOKEN_BEFORE_2],
     taskNotes: [SpecialNotesEnum.RADIO_HOLE],
@@ -238,8 +233,7 @@ export const missions: GameMissionInterface[] = [
   },
   {
     id: 29,
-    note:
-      'Zu keinen Zeitpunkt darf ein Crewmitgleid 2 Stiche mehr haben als ein anderes.',
+    note: 'Zu keinen Zeitpunkt darf ein Crewmitgleid 2 Stiche mehr haben als ein anderes.',
     taskCards: 0,
     taskTokens: [],
     taskNotes: [SpecialNotesEnum.RADIO_HOLE],
@@ -279,16 +273,14 @@ export const missions: GameMissionInterface[] = [
   },
   {
     id: 33,
-    note:
-      'Der Kommandant bestimmt ein anderes Crewmitglied, dass genau einen Stich gewinnen muss - aber nicht mit einer Raketenkarte',
+    note: 'Der Kommandant bestimmt ein anderes Crewmitglied, dass genau einen Stich gewinnen muss - aber nicht mit einer Raketenkarte',
     taskCards: 0,
     taskTokens: [],
     taskNotes: [],
   },
   {
     id: 34,
-    note:
-      'Zu keinem Zeitpunkt darf ein Crewmitglied 2 Stiche mehr haben als ein anderes. Der Kommandant muss außerdem den ersten und den letzten Stich gewinnen.',
+    note: 'Zu keinem Zeitpunkt darf ein Crewmitglied 2 Stiche mehr haben als ein anderes. Der Kommandant muss außerdem den ersten und den letzten Stich gewinnen.',
     taskCards: 0,
     taskTokens: [],
     taskNotes: [],
@@ -344,8 +336,7 @@ export const missions: GameMissionInterface[] = [
   },
   {
     id: 40,
-    note:
-      'Bevor ihr beginnt die Aufträge zu verteilen dürft ihr ein Auftragsplättchen zu einer Misson ohne Auftrag legen',
+    note: 'Bevor ihr beginnt die Aufträge zu verteilen dürft ihr ein Auftragsplättchen zu einer Misson ohne Auftrag legen',
     taskCards: 8,
     taskTokens: [
       TaskTokenEnum.TOKEN_FIRST,
@@ -357,8 +348,7 @@ export const missions: GameMissionInterface[] = [
   },
   {
     id: 41,
-    note:
-      'Der Kommandant bestimmt ein anderes Crewmitglied, dass genau den ersten und den letzten Stich gewinnt. Hierfür darf das Crewmitglied keine Raketenkarte benutzen.',
+    note: 'Der Kommandant bestimmt ein anderes Crewmitglied, dass genau den ersten und den letzten Stich gewinnt. Hierfür darf das Crewmitglied keine Raketenkarte benutzen.',
     taskCards: 0,
     taskTokens: [],
     taskNotes: [],
@@ -381,8 +371,7 @@ export const missions: GameMissionInterface[] = [
   },
   {
     id: 44,
-    note:
-      'Die Raketenkarten müssen je einen Stich gewinnen. Als erstes die 1er Rakete, dann die 2er, 3er und zuletzt die 4er.',
+    note: 'Die Raketenkarten müssen je einen Stich gewinnen. Als erstes die 1er Rakete, dann die 2er, 3er und zuletzt die 4er.',
     taskCards: 0,
     taskTokens: [],
     taskNotes: [],
@@ -401,8 +390,7 @@ export const missions: GameMissionInterface[] = [
   },
   {
     id: 46,
-    note:
-      'Das Crewmitglied links von dem mit der roten 9 muss alle roten Karten gewinnen. Sagt an wer die rote 9 hat.',
+    note: 'Das Crewmitglied links von dem mit der roten 9 muss alle roten Karten gewinnen. Sagt an wer die rote 9 hat.',
     taskCards: 9,
     taskTokens: [],
     taskNotes: [],
@@ -437,8 +425,7 @@ export const missions: GameMissionInterface[] = [
   },
   {
     id: 50,
-    note:
-      'Der Kommandant bestimmt. Eine Person muss die ersten 4 Stiche gewinnen. Ein anderes muss genau den letzten Stich gewinnen. Die restlichen Mitglieder müssen alle anderen Stiche gewinnen',
+    note: 'Der Kommandant bestimmt. Eine Person muss die ersten 4 Stiche gewinnen. Ein anderes muss genau den letzten Stich gewinnen. Die restlichen Mitglieder müssen alle anderen Stiche gewinnen',
     taskCards: 0,
     taskTokens: [],
     taskNotes: [],

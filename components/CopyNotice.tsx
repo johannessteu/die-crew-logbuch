@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 import * as React from 'react';
 
 const CopyNotice: React.FC<{ gameId: string; onConfirm: () => void }> = ({
@@ -21,8 +22,9 @@ const CopyNotice: React.FC<{ gameId: string; onConfirm: () => void }> = ({
       </span>
       <span className="inline-block align-middle mr-8">
         <b className="capitalize">Achtung!</b> Vergiss bitte nicht dir deine
-        Spiel-ID <strong>{gameId}</strong> aufzuschreiben, damit du das Spiel
-        später fortsetzen kannst
+        Spiel-ID
+        <strong>{gameId}</strong> aufzuschreiben, damit du das Spiel fortsetzen
+        kannst
       </span>
       <button
         type="button"

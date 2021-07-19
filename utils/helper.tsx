@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import { SpecialNotesEnum, TaskTokenEnum } from '../interfaces';
 
 const toTimeString = (secNum: number) => {
@@ -141,4 +142,4 @@ const getTokenElement = (token: TaskTokenEnum): JSX.Element => {
   }
 };
 
-export { toTimeString, getTokenElement };
+export { getTokenElement, toTimeString };

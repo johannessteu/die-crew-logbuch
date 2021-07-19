@@ -41,6 +41,10 @@
         @apply  text-sm px-4
     }
 
+    .btn-feedback {
+        @apply rounded-b-none
+    }
+
     .inp {
         @apply text-gray-700 focus:outline-none appearance-none rounded shadow p-3 text-xl
     }

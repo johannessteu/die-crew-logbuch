@@ -1,6 +1,7 @@
-/* eslint-disable no-plusplus */
+/* eslint-disable no-plusplus,react/jsx-one-expression-per-line,react/jsx-curly-newline */
 import * as React from 'react';
 import { useEffect, useRef, useState } from 'react';
+
 import { useCrewGame } from '../hooks/useCrewGame';
 import {
   getSpecialMissionNotes,

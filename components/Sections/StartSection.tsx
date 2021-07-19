@@ -1,6 +1,7 @@
-import { useRouter } from 'next/router';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+
 import NewGame from '../Game/NewGame';
 import ResumeGame from '../Game/ResumeGame';
 import TransparentBox from '../TransparentBox';
@@ -43,7 +44,7 @@ const StartSection: React.FC = () => {
                 kannst? Das Dann bist du hier beim Logbuch genau richtig. Starte
                 jetzt eine neue Reise oder setze deine bisherige Reise weiter
                 fort!
-              </p>{' '}
+              </p>
               <div className="flex flex-col md:flex-row">
                 <button
                   type="button"

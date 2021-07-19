@@ -1,6 +1,7 @@
-import { GetServerSideProps } from 'next';
 import { createContext, useEffect, useState } from 'react';
 import * as React from 'react';
+import { GetServerSideProps } from 'next';
+
 import CopyNotice from '../../components/CopyNotice';
 import GameDetails from '../../components/GameDetails';
 import Missions from '../../components/Missions';
@@ -65,26 +66,24 @@ const GamePage: React.FC<GamePageInterface> = ({ game, gameMissions }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps<GamePageInterface> = async ({
-  res,
-  query,
-}) => {
-  const { game } = query;
+export const getServerSideProps: GetServerSideProps<GamePageInterface> =
+  async ({ res, query }) => {
+    const { game } = query;
 
-  const docRef = firestoreDb.collection('games').doc(game as string);
-  const doc = await docRef.get();
+    const docRef = firestoreDb.collection('games').doc(game as string);
+    const doc = await docRef.get();
 
-  if (!doc.exists) {
-    res.writeHead(307, { Location: '/?notfound=1' });
-    res.end();
-  }
+    if (!doc.exists) {
+      res.writeHead(307, { Location: '/?notfound=1' });
+      res.end();
+    }
 
-  return {
-    props: {
-      gameMissions: missions,
-      game: doc.data() as GameInterface,
-    },
+    return {
+      props: {
+        gameMissions: missions,
+        game: doc.data() as GameInterface,
+      },
+    };
   };
-};
 
 export default GamePage;

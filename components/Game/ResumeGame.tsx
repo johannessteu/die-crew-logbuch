@@ -1,6 +1,7 @@
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import * as React from 'react';
+import { useRouter } from 'next/router';
+
 import useLocalStorage from '../../hooks/useLocalStorage';
 
 const ResumeGame: React.FC = () => {
@@ -65,7 +66,7 @@ const ResumeGame: React.FC = () => {
       <div className="flex flex-col md:flex-row md:items-end md:mb-4">
         <div className="md:flex-grow flex items-stretch flex-col mb: mr-3">
           <label htmlFor="gameId" className="block font-mono mb-2 text-md">
-            {crewGames.length > 0 ? 'Oder gib' : 'Gib'} deine Spiel-ID ein
+            {`${crewGames.length > 0 ? 'Oder gib' : 'Gib'} deine Spiel-ID ein`}
           </label>
           <input
             id="gameId"

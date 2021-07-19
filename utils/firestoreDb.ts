@@ -1,5 +1,5 @@
-import * as admin from 'firebase-admin';
 import * as atob from 'atob';
+import * as admin from 'firebase-admin';
 
 const credentials = atob(process.env.GCLOUD_CREDENTIALS);
 

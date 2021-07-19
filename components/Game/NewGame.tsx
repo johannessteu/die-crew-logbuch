@@ -1,7 +1,8 @@
-import { useRouter } from 'next/router';
-import qs from 'querystring';
 import * as React from 'react';
 import { useRef, useState } from 'react';
+import { useRouter } from 'next/router';
+import qs from 'querystring';
+
 import useLocalStorage from '../../hooks/useLocalStorage';
 
 const AttendeeTag: React.FC<{

@@ -1,5 +1,8 @@
+/* eslint-disable react/no-unescaped-entities */
+import * as React from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
+
 import Section from '../components/Sections/Section';
 import StartSection from '../components/Sections/StartSection';
 
@@ -64,6 +67,7 @@ export default function Home() {
               Youtube-Tutorials an!
             </p>
             <iframe
+              title="Die Crew Tutorial"
               width="100%"
               height="315"
               src="https://www.youtube-nocookie.com/embed/6KsSq1kbnBo"
