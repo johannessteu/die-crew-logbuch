@@ -12,6 +12,7 @@ type ViewMode = 'INTRO' | 'NEW' | 'RESUME';
 const DeepSeaNotice: React.FC = () => {
   return (
     <div className="mt-6 bg-gray-200 rounded px-5 py-3 bg-opacity-20 md:w-10/12 xl:w-2/3 max-w-2xl">
+      {/* eslint-disable-next-line react/no-unescaped-entities */}
       ⚠️ In Kürze könnt ihr auch "Mission Tiefsee" hier spielen!
     </div>
   );

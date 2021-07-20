@@ -8,8 +8,6 @@ import Document, {
   NextScript,
 } from 'next/document';
 
-import FeedbackBubble from '../components/FeedbackBubble';
-
 class MyDocument extends Document {
   static async getInitialProps(
     ctx: DocumentContext
