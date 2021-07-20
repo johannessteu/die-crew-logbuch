@@ -1,8 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
 import * as React from 'react';
+import { FeedbackFish } from '@feedback-fish/react';
 import Head from 'next/head';
 import Image from 'next/image';
 
+import FeedbackBubble from '../components/FeedbackBubble';
 import Section from '../components/Sections/Section';
 import StartSection from '../components/Sections/StartSection';
 
@@ -78,6 +80,31 @@ export default function Home() {
           </div>
         </div>
       </Section>
+      <Section bg="bg-white">
+        <div className="flex flex-col md:flex-row px-5">
+          <div className="flex-1 w-full md:w-auto">
+            <span className="font-mono uppercase">Der Nachfolger</span>
+            <h2 className="text-3xl mb-6">Mission Tiefsee</h2>
+            <p>
+              Nachdem ihr auf dem Weg zum 9. Planeten das All erforscht habt
+              geht es nun in dem Nachfolger in die Tiefsee! Dabei bleibt sich
+              "Die Crew" seinem erfolgreichen Spiel treu. Erneut spielt ihr in
+              diesem Kooperativen Spiel zusammen und versucht Missionen zu
+              erfüllgen. Im Vergleich zum ersten Spiel kommt "Mission Tiefsee"
+              auch mit einem Spielmodus für zwei Spieler daher.
+            </p>
+          </div>
+          <div className="w-4/5 xs:w-4/6 md:w-1/3 mx-auto md:mx-0 mb-6 md:mb-0 md:ml-6 text-center md:w-1/3 lg:max-w-md sm:visible">
+            <Image
+              src="/mission-tiefsee.jpg"
+              alt="Die Crew"
+              width={300}
+              height={400}
+            />
+          </div>
+        </div>
+      </Section>
+      <FeedbackBubble />
     </>
   );
 }

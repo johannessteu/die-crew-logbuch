@@ -9,6 +9,14 @@ import HeroSection from './HeroSection';
 
 type ViewMode = 'INTRO' | 'NEW' | 'RESUME';
 
+const DeepSeaNotice: React.FC = () => {
+  return (
+    <div className="mt-6 bg-gray-200 rounded px-5 py-3 bg-opacity-20 md:w-10/12 xl:w-2/3 max-w-2xl">
+      ⚠️ In Kürze könnt ihr auch "Mission Tiefsee" hier spielen!
+    </div>
+  );
+};
+
 const StartSection: React.FC = () => {
   const router = useRouter();
   const [viewMode, setViewMode] = useState<ViewMode>('INTRO');
@@ -64,6 +72,7 @@ const StartSection: React.FC = () => {
             </>
           )}
         </TransparentBox>
+        <DeepSeaNotice />
       </div>
     </HeroSection>
   );

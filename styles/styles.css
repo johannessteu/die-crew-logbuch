@@ -42,7 +42,7 @@
     }
 
     .btn-feedback {
-        @apply rounded-b-none
+        @apply rounded-r-none text-white bg-blue-600
     }
 
     .inp {

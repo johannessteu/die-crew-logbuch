@@ -3,6 +3,7 @@ import * as React from 'react';
 import { GetServerSideProps } from 'next';
 
 import CopyNotice from '../../components/CopyNotice';
+import FeedbackBubble from '../../components/FeedbackBubble';
 import GameDetails from '../../components/GameDetails';
 import Missions from '../../components/Missions';
 import HeroSection from '../../components/Sections/HeroSection';
@@ -62,6 +63,7 @@ const GamePage: React.FC<GamePageInterface> = ({ game, gameMissions }) => {
           <Missions />
         </div>
       </Section>
+      <FeedbackBubble />
     </CrewGameProvider>
   );
 };

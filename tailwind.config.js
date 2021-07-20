@@ -7,6 +7,7 @@ module.exports = {
     extend: {
       opacity: ['disabled'],
       backgroundColor: ['disabled'],
+      display: ['group-hover'],
     },
   },
   theme: {
