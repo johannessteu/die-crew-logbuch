@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import qs from 'querystring';
 
 import useLocalStorage from '../../hooks/useLocalStorage';
+import { GameType } from '../../interfaces';
 
 const AttendeeTag: React.FC<{
   name: string;
@@ -27,7 +28,7 @@ const AttendeeTag: React.FC<{
   );
 };
 
-const NewGame: React.FC = () => {
+const NewGame: React.FC<{ type: GameType }> = ({ type }) => {
   const router = useRouter();
   const newAttendeeRef = useRef(null);
   const [loading, setLoading] = useState(false);
@@ -44,6 +45,7 @@ const NewGame: React.FC = () => {
     const res = await fetch(
       `api/startgame?${qs.stringify({
         attendees: attendees.join(','),
+        type,
         crewName,
       })}`
     ).then((r) => r.json());
@@ -167,7 +169,11 @@ const NewGame: React.FC = () => {
               />
             </svg>
           )}
-          {loading ? 'Spiel wird gestartet' : 'Auf zum 9. Planeten!'}
+          {loading
+            ? 'Spiel wird gestartet'
+            : type === 'space'
+            ? 'Auf zum 9. Planeten!'
+            : 'Ab in die Tiefsee'}
         </button>
       </div>
     </>

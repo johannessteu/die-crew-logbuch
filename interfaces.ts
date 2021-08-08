@@ -1,3 +1,5 @@
+export type GameType = 'deepSea' | 'space';
+
 export interface MissionPlayedInterface {
   mission: number;
   trials: number;
@@ -14,6 +16,7 @@ export interface GameInterface {
   crewName: string;
   player: string[];
   currentMission: number;
+  type: GameType;
   missions: MissionPlayedInterface[];
 }
 
@@ -37,9 +40,14 @@ export enum SpecialNotesEnum {
   COMMANDER_DECISION = 'Durch Abfrage bestimmt der Kommandant ein anderes Crew-Mitglied, das alle Aufträge erfüllen muss. Alle Auftragskarten werden erst nach Ihrer Vergabe aufgedeckt. ',
   RADIO_HOLE = 'Funkloch! Kommuniziert eine Karte nach den normalen Regeln, aber platziert kein Funkplättchen darauf. ',
   RADIO_INTERFERENCE = 'Es gibt eine Störung des Funksystems. Die Kommunikation ist erst zu Beginn des xx. Stichs erlaubt. ',
+  RADIO_FLOW = 'Strömung! Kommuniziert eine Karte nach den normanel Regeln, aber platziert kein Sonarplättchen darauf.',
+  RADIO_DEPTH_RAGE = 'Tiefenrausch! Zwei Sonarplättchen entfernen. Der Rest steht der gesamten Crew zur Verfügung.',
+  FREE_ORDER_CHOICE = 'Freie Auftragswahl! Diskutiert eure bevorzugte Verteilung der Aufträge und führt Sie entsprechend durch.',
+  RADIO_UNKNOWN_TERRAIN = 'Unbekanntes Terrain! Zufällige Farbkarte ziehen. 1-3 => normale Kommunikation, 4-5 => Strömung, 7-9 => Tiefenrausch.',
+  REALTIME = 'Echtzeit!',
 }
 
-export interface GameMissionInterface {
+export interface BaseMissionInterface {
   id: number;
   taskCards: number;
   taskTokens: TaskTokenEnum[];
@@ -48,3 +56,15 @@ export interface GameMissionInterface {
   radioInterferenceAfter?: number;
   specialRule?: boolean;
 }
+
+export interface SpaceMissionInterface extends BaseMissionInterface {
+  gameType: 'space';
+}
+
+export interface DeepSeaMissionInterface extends BaseMissionInterface {
+  gameType: 'deepSea';
+}
+
+export type GameMissionInterface =
+  | SpaceMissionInterface
+  | DeepSeaMissionInterface;

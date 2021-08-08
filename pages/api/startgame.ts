@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { GameInterface } from '../../interfaces';
+import { GameInterface, GameType } from '../../interfaces';
 import db from '../../utils/firestoreDb';
 
 const generateRandomGameIdentifier = (): string => {
@@ -23,12 +23,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const identifier = generateRandomGameIdentifier();
 
   const {
-    query: { attendees, crewName },
+    query: { attendees, crewName, type },
   } = req;
 
   const gameData: GameInterface = {
     identifier,
     crewName: crewName as string,
+    type: type as GameType,
     player: attendees.toString().split(','),
     currentMission: 1,
     missions: [

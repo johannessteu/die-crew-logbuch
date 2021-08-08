@@ -2,25 +2,19 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
+import { GameType } from '../../interfaces';
+import ChooseGame from '../Game/ChooseGame';
 import NewGame from '../Game/NewGame';
 import ResumeGame from '../Game/ResumeGame';
 import TransparentBox from '../TransparentBox';
 import HeroSection from './HeroSection';
 
-type ViewMode = 'INTRO' | 'NEW' | 'RESUME';
-
-const DeepSeaNotice: React.FC = () => {
-  return (
-    <div className="mt-6 bg-gray-200 rounded px-5 py-3 bg-opacity-20 md:w-10/12 xl:w-2/3 max-w-2xl">
-      {/* eslint-disable-next-line react/no-unescaped-entities */}
-      ⚠️ In Kürze könnt ihr auch "Mission Tiefsee" hier spielen!
-    </div>
-  );
-};
+type ViewMode = 'INTRO' | 'CHOOSE_GAME' | 'NEW' | 'RESUME';
 
 const StartSection: React.FC = () => {
   const router = useRouter();
   const [viewMode, setViewMode] = useState<ViewMode>('INTRO');
+  const [gameType, setGameType] = useState<GameType | null>(null);
 
   useEffect(() => {
     const { notfound } = router.query;
@@ -30,7 +24,7 @@ const StartSection: React.FC = () => {
   }, [router.query]);
 
   return (
-    <HeroSection>
+    <HeroSection background={gameType}>
       <div className="text-left w-full text-white">
         <h1 className="heroHeadline">
           <span className="font-mono uppercase text-sm tracking-widest font-medium mb-2 inline-block border-b-2 border-red-500">
@@ -40,8 +34,15 @@ const StartSection: React.FC = () => {
         </h1>
 
         <TransparentBox className="md:w-10/12 xl:w-2/3 max-w-2xl">
-          {viewMode === 'NEW' ? (
-            <NewGame />
+          {viewMode === 'CHOOSE_GAME' ? (
+            <ChooseGame
+              onChoose={(type) => {
+                setGameType(type);
+                setViewMode('NEW');
+              }}
+            />
+          ) : viewMode === 'NEW' ? (
+            <NewGame type={gameType} />
           ) : viewMode === 'RESUME' ? (
             <ResumeGame />
           ) : (
@@ -58,7 +59,7 @@ const StartSection: React.FC = () => {
                 <button
                   type="button"
                   className="btn btn-primary mb-2  md:mr-6 md:mb-0"
-                  onClick={() => setViewMode('NEW')}
+                  onClick={() => setViewMode('CHOOSE_GAME')}
                 >
                   Neues Spiel starten
                 </button>
@@ -73,7 +74,6 @@ const StartSection: React.FC = () => {
             </>
           )}
         </TransparentBox>
-        <DeepSeaNotice />
       </div>
     </HeroSection>
   );

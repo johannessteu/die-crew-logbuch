@@ -1,6 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
 import * as React from 'react';
-import { FeedbackFish } from '@feedback-fish/react';
 import Head from 'next/head';
 import Image from 'next/image';
 
@@ -54,7 +53,7 @@ export default function Home() {
             <p className="mt-3">
               Als Crew begebt ihr euch bei dem Spiel auf die Reise zum 9.
               Planeten. Euren Spielfortschritt könnt ihr im Logbuch notieren.
-              Allerdigns müsst ihr dafür das Logbuch, dass im Spiel beigelegt
+              Allerdings müsst ihr dafür das Logbuch, dass im Spiel beigelegt
               ist, beschriften. So seit ihr auch limitiert mit wie vielen Leuten
               ihr die Reise zum 9. Planeten begehen wollt.Daher findet ihr hier
               eine digitale Version des Logbuchs. Startet einfach ein neues
@@ -90,7 +89,7 @@ export default function Home() {
               geht es nun in dem Nachfolger in die Tiefsee! Dabei bleibt sich
               "Die Crew" seinem erfolgreichen Spiel treu. Erneut spielt ihr in
               diesem Kooperativen Spiel zusammen und versucht Missionen zu
-              erfüllgen. Im Vergleich zum ersten Spiel kommt "Mission Tiefsee"
+              erfüllen. Im Vergleich zum ersten Spiel kommt "Mission Tiefsee"
               auch mit einem Spielmodus für zwei Spieler daher.
             </p>
           </div>

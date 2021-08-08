@@ -1,16 +1,18 @@
 import {
-  GameMissionInterface,
+  DeepSeaMissionInterface,
+  SpaceMissionInterface,
   SpecialNotesEnum,
   TaskTokenEnum,
 } from './interfaces';
 
-export const missions: GameMissionInterface[] = [
+const spaceMissions: SpaceMissionInterface[] = [
   {
     id: 1,
     note: '',
     taskCards: 1,
     taskTokens: [],
     taskNotes: [],
+    gameType: 'space',
   },
   {
     id: 2,
@@ -18,6 +20,7 @@ export const missions: GameMissionInterface[] = [
     taskCards: 2,
     taskTokens: [],
     taskNotes: [],
+    gameType: 'space',
   },
   {
     id: 3,
@@ -25,6 +28,7 @@ export const missions: GameMissionInterface[] = [
     note: '',
     taskTokens: [TaskTokenEnum.TOKEN_FIRST, TaskTokenEnum.TOKEN_SECOND],
     taskNotes: [],
+    gameType: 'space',
   },
   {
     id: 4,
@@ -32,6 +36,7 @@ export const missions: GameMissionInterface[] = [
     taskCards: 3,
     taskTokens: [],
     taskNotes: [],
+    gameType: 'space',
   },
   {
     id: 5,
@@ -39,6 +44,7 @@ export const missions: GameMissionInterface[] = [
     taskCards: 0,
     taskTokens: [],
     taskNotes: [],
+    gameType: 'space',
   },
   {
     id: 6,
@@ -46,6 +52,7 @@ export const missions: GameMissionInterface[] = [
     taskCards: 3,
     taskTokens: [TaskTokenEnum.TOKEN_BEFORE_1, TaskTokenEnum.TOKEN_BEFORE_2],
     taskNotes: [SpecialNotesEnum.RADIO_HOLE],
+    gameType: 'space',
   },
   {
     id: 7,
@@ -53,6 +60,7 @@ export const missions: GameMissionInterface[] = [
     taskCards: 3,
     taskTokens: [TaskTokenEnum.TOKEN_LAST],
     taskNotes: [],
+    gameType: 'space',
   },
   {
     id: 8,
@@ -64,6 +72,7 @@ export const missions: GameMissionInterface[] = [
       TaskTokenEnum.TOKEN_THIRD,
     ],
     taskNotes: [],
+    gameType: 'space',
   },
   {
     id: 9,
@@ -71,6 +80,7 @@ export const missions: GameMissionInterface[] = [
     taskCards: 1,
     taskTokens: [],
     taskNotes: [],
+    gameType: 'space',
   },
   {
     id: 10,
@@ -78,6 +88,7 @@ export const missions: GameMissionInterface[] = [
     taskCards: 4,
     taskTokens: [],
     taskNotes: [],
+    gameType: 'space',
   },
   {
     id: 11,
@@ -85,6 +96,8 @@ export const missions: GameMissionInterface[] = [
     taskCards: 4,
     taskTokens: [TaskTokenEnum.TOKEN_FIRST],
     taskNotes: [],
+
+    gameType: 'space',
   },
   {
     id: 12,
@@ -92,6 +105,8 @@ export const missions: GameMissionInterface[] = [
     taskCards: 4,
     taskTokens: [TaskTokenEnum.TOKEN_LAST],
     taskNotes: [],
+
+    gameType: 'space',
   },
   {
     id: 13,
@@ -99,6 +114,7 @@ export const missions: GameMissionInterface[] = [
     taskCards: 0,
     taskTokens: [],
     taskNotes: [],
+    gameType: 'space',
   },
   {
     id: 14,
@@ -110,6 +126,7 @@ export const missions: GameMissionInterface[] = [
       TaskTokenEnum.TOKEN_BEFORE_3,
     ],
     taskNotes: [SpecialNotesEnum.RADIO_HOLE],
+    gameType: 'space',
   },
   {
     id: 15,
@@ -122,6 +139,7 @@ export const missions: GameMissionInterface[] = [
       TaskTokenEnum.TOKEN_FOURTH,
     ],
     taskNotes: [],
+    gameType: 'space',
   },
   {
     id: 16,
@@ -129,6 +147,7 @@ export const missions: GameMissionInterface[] = [
     taskCards: 0,
     taskTokens: [],
     taskNotes: [],
+    gameType: 'space',
   },
   {
     id: 17,
@@ -136,6 +155,7 @@ export const missions: GameMissionInterface[] = [
     taskCards: 2,
     taskTokens: [],
     taskNotes: [],
+    gameType: 'space',
   },
   {
     id: 18,
@@ -144,6 +164,7 @@ export const missions: GameMissionInterface[] = [
     taskTokens: [],
     taskNotes: [SpecialNotesEnum.RADIO_INTERFERENCE],
     radioInterferenceAfter: 2,
+    gameType: 'space',
   },
   {
     id: 19,
@@ -152,6 +173,7 @@ export const missions: GameMissionInterface[] = [
     taskTokens: [TaskTokenEnum.TOKEN_FIRST],
     taskNotes: [SpecialNotesEnum.RADIO_INTERFERENCE],
     radioInterferenceAfter: 3,
+    gameType: 'space',
   },
   {
     id: 20,
@@ -159,6 +181,7 @@ export const missions: GameMissionInterface[] = [
     taskCards: 2,
     taskTokens: [],
     taskNotes: [SpecialNotesEnum.COMMANDER_DECISION],
+    gameType: 'space',
   },
   {
     id: 21,
@@ -166,6 +189,7 @@ export const missions: GameMissionInterface[] = [
     taskCards: 5,
     taskTokens: [TaskTokenEnum.TOKEN_FIRST, TaskTokenEnum.TOKEN_SECOND],
     taskNotes: [SpecialNotesEnum.RADIO_HOLE],
+    gameType: 'space',
   },
   {
     id: 22,
@@ -178,6 +202,7 @@ export const missions: GameMissionInterface[] = [
       TaskTokenEnum.TOKEN_BEFORE_4,
     ],
     taskNotes: [],
+    gameType: 'space',
   },
   {
     id: 23,
@@ -191,6 +216,7 @@ export const missions: GameMissionInterface[] = [
       TaskTokenEnum.TOKEN_FIFTH,
     ],
     taskNotes: [],
+    gameType: 'space',
   },
   {
     id: 24,
@@ -198,6 +224,7 @@ export const missions: GameMissionInterface[] = [
     taskCards: 6,
     taskTokens: [],
     taskNotes: [SpecialNotesEnum.COMMANDER_DISTRIBUTION],
+    gameType: 'space',
   },
   {
     id: 25,
@@ -206,6 +233,7 @@ export const missions: GameMissionInterface[] = [
     taskTokens: [TaskTokenEnum.TOKEN_BEFORE_1, TaskTokenEnum.TOKEN_BEFORE_2],
     taskNotes: [SpecialNotesEnum.RADIO_HOLE],
     specialRule: true,
+    gameType: 'space',
   },
   {
     id: 26,
@@ -213,6 +241,7 @@ export const missions: GameMissionInterface[] = [
     taskCards: 0,
     taskTokens: [],
     taskNotes: [],
+    gameType: 'space',
   },
   {
     id: 27,
@@ -221,6 +250,7 @@ export const missions: GameMissionInterface[] = [
     taskTokens: [],
     specialRule: true,
     taskNotes: [SpecialNotesEnum.COMMANDER_DECISION],
+    gameType: 'space',
   },
   {
     id: 28,
@@ -230,6 +260,7 @@ export const missions: GameMissionInterface[] = [
     taskNotes: [SpecialNotesEnum.RADIO_INTERFERENCE],
     radioInterferenceAfter: 3,
     specialRule: true,
+    gameType: 'space',
   },
   {
     id: 29,
@@ -237,6 +268,7 @@ export const missions: GameMissionInterface[] = [
     taskCards: 0,
     taskTokens: [],
     taskNotes: [SpecialNotesEnum.RADIO_HOLE],
+    gameType: 'space',
   },
   {
     id: 30,
@@ -250,6 +282,7 @@ export const missions: GameMissionInterface[] = [
     specialRule: true,
     taskNotes: [SpecialNotesEnum.RADIO_INTERFERENCE],
     radioInterferenceAfter: 2,
+    gameType: 'space',
   },
   {
     id: 31,
@@ -262,6 +295,7 @@ export const missions: GameMissionInterface[] = [
     ],
     specialRule: true,
     taskNotes: [],
+    gameType: 'space',
   },
   {
     id: 32,
@@ -270,6 +304,7 @@ export const missions: GameMissionInterface[] = [
     taskTokens: [],
     specialRule: true,
     taskNotes: [SpecialNotesEnum.COMMANDER_DISTRIBUTION],
+    gameType: 'space',
   },
   {
     id: 33,
@@ -277,6 +312,7 @@ export const missions: GameMissionInterface[] = [
     taskCards: 0,
     taskTokens: [],
     taskNotes: [],
+    gameType: 'space',
   },
   {
     id: 34,
@@ -284,6 +320,7 @@ export const missions: GameMissionInterface[] = [
     taskCards: 0,
     taskTokens: [],
     taskNotes: [],
+    gameType: 'space',
   },
   {
     id: 35,
@@ -296,6 +333,7 @@ export const missions: GameMissionInterface[] = [
     ],
     specialRule: true,
     taskNotes: [],
+    gameType: 'space',
   },
   {
     id: 36,
@@ -304,6 +342,7 @@ export const missions: GameMissionInterface[] = [
     taskTokens: [TaskTokenEnum.TOKEN_FIRST, TaskTokenEnum.TOKEN_SECOND],
     specialRule: true,
     taskNotes: [SpecialNotesEnum.COMMANDER_DISTRIBUTION],
+    gameType: 'space',
   },
   {
     id: 37,
@@ -312,6 +351,7 @@ export const missions: GameMissionInterface[] = [
     taskTokens: [],
     specialRule: true,
     taskNotes: [SpecialNotesEnum.COMMANDER_DECISION],
+    gameType: 'space',
   },
   {
     id: 38,
@@ -321,6 +361,7 @@ export const missions: GameMissionInterface[] = [
     specialRule: true,
     radioInterferenceAfter: 3,
     taskNotes: [SpecialNotesEnum.RADIO_INTERFERENCE],
+    gameType: 'space',
   },
   {
     id: 39,
@@ -333,6 +374,7 @@ export const missions: GameMissionInterface[] = [
     ],
     specialRule: true,
     taskNotes: [SpecialNotesEnum.RADIO_HOLE],
+    gameType: 'space',
   },
   {
     id: 40,
@@ -345,6 +387,7 @@ export const missions: GameMissionInterface[] = [
     ],
     specialRule: true,
     taskNotes: [],
+    gameType: 'space',
   },
   {
     id: 41,
@@ -352,6 +395,7 @@ export const missions: GameMissionInterface[] = [
     taskCards: 0,
     taskTokens: [],
     taskNotes: [],
+    gameType: 'space',
   },
   {
     id: 42,
@@ -360,6 +404,7 @@ export const missions: GameMissionInterface[] = [
     taskTokens: [],
     specialRule: true,
     taskNotes: [],
+    gameType: 'space',
   },
   {
     id: 43,
@@ -368,6 +413,7 @@ export const missions: GameMissionInterface[] = [
     taskTokens: [],
     specialRule: true,
     taskNotes: [SpecialNotesEnum.COMMANDER_DISTRIBUTION],
+    gameType: 'space',
   },
   {
     id: 44,
@@ -375,6 +421,8 @@ export const missions: GameMissionInterface[] = [
     taskCards: 0,
     taskTokens: [],
     taskNotes: [],
+
+    gameType: 'space',
   },
   {
     id: 45,
@@ -387,6 +435,7 @@ export const missions: GameMissionInterface[] = [
     ],
     taskNotes: [],
     specialRule: true,
+    gameType: 'space',
   },
   {
     id: 46,
@@ -394,6 +443,7 @@ export const missions: GameMissionInterface[] = [
     taskCards: 9,
     taskTokens: [],
     taskNotes: [],
+    gameType: 'space',
   },
   {
     id: 47,
@@ -402,6 +452,7 @@ export const missions: GameMissionInterface[] = [
     taskTokens: [],
     specialRule: true,
     taskNotes: [],
+    gameType: 'space',
   },
   {
     id: 48,
@@ -410,6 +461,7 @@ export const missions: GameMissionInterface[] = [
     taskTokens: [TaskTokenEnum.TOKEN_LAST],
     taskNotes: [],
     specialRule: true,
+    gameType: 'space',
   },
   {
     id: 49,
@@ -422,6 +474,7 @@ export const missions: GameMissionInterface[] = [
     ],
     specialRule: true,
     taskNotes: [],
+    gameType: 'space',
   },
   {
     id: 50,
@@ -429,5 +482,270 @@ export const missions: GameMissionInterface[] = [
     taskCards: 0,
     taskTokens: [],
     taskNotes: [],
+    gameType: 'space',
   },
 ];
+
+const deepSeaMissions: DeepSeaMissionInterface[] = [
+  {
+    id: 1,
+    gameType: 'deepSea',
+    taskTokens: [],
+    taskCards: 1,
+    note: '',
+    taskNotes: [],
+  },
+  {
+    id: 2,
+    gameType: 'deepSea',
+    taskTokens: [],
+    taskCards: 2,
+    note: '',
+    taskNotes: [],
+  },
+  {
+    id: 3,
+    gameType: 'deepSea',
+    taskTokens: [],
+    taskCards: 3,
+    note: '',
+    taskNotes: [],
+  },
+  {
+    id: 4,
+    gameType: 'deepSea',
+    taskTokens: [],
+    taskCards: 4,
+    note: '',
+    taskNotes: [],
+  },
+  {
+    id: 5,
+    gameType: 'deepSea',
+    taskTokens: [],
+    taskCards: 5,
+    note: '',
+    taskNotes: [],
+  },
+  {
+    id: 6,
+    gameType: 'deepSea',
+    taskTokens: [],
+    taskCards: 5,
+    note: 'Entscheidet gemeinsam, welches Crewmitglied alle Aufträge übernimmt aber verratet nichts über eure Handkarten.',
+    taskNotes: [],
+  },
+  {
+    id: 7,
+    gameType: 'deepSea',
+    taskTokens: [],
+    taskCards: 6,
+    note: '',
+    taskNotes: [],
+  },
+  {
+    id: 8,
+    gameType: 'deepSea',
+    taskTokens: [],
+    taskCards: 0,
+    note: 'Zu keinem Zeitpunkt darf ein Crewmitglied zwei 9-er Karten mehr als ein anderes Crewmitglied gewonnen haben.',
+    taskNotes: [],
+  },
+  {
+    id: 9,
+    gameType: 'deepSea',
+    taskTokens: [],
+    taskCards: 7,
+    note: '',
+    taskNotes: [SpecialNotesEnum.RADIO_FLOW],
+  },
+  {
+    id: 10,
+    gameType: 'deepSea',
+    taskTokens: [],
+    taskCards: 4,
+    note: "Euer Käpt'n übernimmt alle Aufträge oder gibt alle an ein freiwilliges Crewmitglied ab. Werden sie abgegeben, muss jeder vor dem ersten Stich kommunizieren.",
+    taskNotes: [],
+  },
+  {
+    id: 11,
+    gameType: 'deepSea',
+    taskTokens: [],
+    taskCards: 8,
+    note: '',
+    taskNotes: [SpecialNotesEnum.RADIO_DEPTH_RAGE],
+  },
+  {
+    id: 12,
+    gameType: 'deepSea',
+    taskTokens: [],
+    taskCards: 0,
+    note: 'Kein Stich darf mit einer roten oder einer U-Boot-Karte eröffnet werden.',
+    taskNotes: [],
+  },
+  {
+    id: 13,
+    gameType: 'deepSea',
+    taskTokens: [],
+    taskCards: 5,
+    note: "Euer Käpt'n übernimmt alle Aufträge oder gibt alle an ein freiwilliges Crewmitglied ab. Werden sie abgegeben, muss jeder vor dem ersten Stich kommunizieren.",
+    taskNotes: [],
+  },
+  {
+    id: 14,
+    gameType: 'deepSea',
+    taskTokens: [],
+    taskCards: 6,
+    note: 'Ihr habt 3:30 Minuten Zeit, die Aufträge zu erfüllen. Spielt ihr ohne Zeitbegrenzung, gilt stattdessen die Strömungs-Regel.',
+    taskNotes: [SpecialNotesEnum.REALTIME],
+  },
+  {
+    id: 15,
+    gameType: 'deepSea',
+    taskTokens: [],
+    taskCards: 6,
+    note: 'Ihr habt 3:00 Minuten Zeit, die Aufträge zu erfüllen. Spielt ihr ohne Zeitbegrenzung, gilt stattdessen die Tiefenrausch-Regel.',
+    taskNotes: [SpecialNotesEnum.REALTIME],
+  },
+  {
+    id: 16,
+    gameType: 'deepSea',
+    taskTokens: [],
+    taskCards: 6,
+    note: 'Ihr habt 2:30 Minuten Zeit, die Aufträge zu erfüllen. Spielt ihr ohne Zeitbegrenzung, ist stattdessen gar keine Kommunikation erlaubt.',
+    taskNotes: [SpecialNotesEnum.REALTIME],
+  },
+  {
+    id: 17,
+    gameType: 'deepSea',
+    taskTokens: [],
+    taskCards: 9,
+    note: 'Es gilt die freie Auftragswahl',
+    taskNotes: [SpecialNotesEnum.FREE_ORDER_CHOICE],
+  },
+  {
+    id: 18,
+    gameType: 'deepSea',
+    taskTokens: [],
+    taskCards: 9,
+    note: '',
+    taskNotes: [],
+  },
+  {
+    id: 19,
+    gameType: 'deepSea',
+    taskTokens: [],
+    taskCards: 9,
+    note: "Euer Käpt'n muss als ersten Auftrag einen der ausliegenden Aufträge mit dem höchsten Schwierigkeitsgrad nehmen. Die übrigen Aufträge wählt ihr wie gewohnt im Uhrzeigersinn aus.",
+    taskNotes: [],
+  },
+  {
+    id: 20,
+    gameType: 'deepSea',
+    taskTokens: [],
+    taskCards: 10,
+    note: '',
+    taskNotes: [SpecialNotesEnum.RADIO_UNKNOWN_TERRAIN],
+  },
+  {
+    id: 21,
+    gameType: 'deepSea',
+    taskTokens: [],
+    taskCards: 0,
+    note: 'Zu keinem Zeitpunkt darf ein Crewmitglied zwei 1er Farbkarten mehr als ein anderes Crewmitglied gewonnen haben.',
+    taskNotes: [SpecialNotesEnum.RADIO_UNKNOWN_TERRAIN],
+  },
+  {
+    id: 22,
+    gameType: 'deepSea',
+    taskTokens: [],
+    taskCards: 11,
+    note: '',
+    taskNotes: [SpecialNotesEnum.RADIO_UNKNOWN_TERRAIN],
+  },
+  {
+    id: 23,
+    gameType: 'deepSea',
+    taskTokens: [],
+    taskCards: 0,
+    note: 'Wer den ersten Stich gewinnt, muss zu jedem Zeitpunkt mehr Stiche gewonnen haben, als jedes andere Crewmitglied. Ihr dürft erst zum zweiten Stich (also direkt davor) kommunizieren.',
+    taskNotes: [SpecialNotesEnum.RADIO_UNKNOWN_TERRAIN],
+  },
+  {
+    id: 24,
+    gameType: 'deepSea',
+    taskTokens: [],
+    taskCards: 12,
+    note: '',
+    taskNotes: [SpecialNotesEnum.RADIO_UNKNOWN_TERRAIN],
+  },
+  {
+    id: 25,
+    gameType: 'deepSea',
+    taskTokens: [],
+    taskCards: 12,
+    note: "Wählt die Aufträge wie gewohnt im Uhrzeigersinn. Euer Käpt'n wird allerdings immer übersprungen und erhält daher keine Aufträge.",
+    taskNotes: [SpecialNotesEnum.RADIO_UNKNOWN_TERRAIN],
+  },
+  {
+    id: 26,
+    gameType: 'deepSea',
+    taskTokens: [],
+    taskCards: 10,
+    note: 'Ihr habt 5:00 Minuten Zeit, die Aufträge zu erfüllen. Spielt Ihr ohne Zeitbegrenzung, steigt der Gesamt-Schwierigkeitsgrad auf 12.',
+    taskNotes: [
+      SpecialNotesEnum.RADIO_UNKNOWN_TERRAIN,
+      SpecialNotesEnum.REALTIME,
+    ],
+  },
+  {
+    id: 27,
+    gameType: 'deepSea',
+    taskTokens: [],
+    taskCards: 0,
+    note: 'Die gelbe 5 muss als letzte Karte im letzten Strich der gesamten Mission ausgespielt werden. Im Spiel zu dritt darf Sie also nicht übrig bleiben.',
+    taskNotes: [SpecialNotesEnum.RADIO_UNKNOWN_TERRAIN],
+  },
+  {
+    id: 28,
+    gameType: 'deepSea',
+    taskTokens: [],
+    taskCards: 14,
+    note: '',
+    taskNotes: [SpecialNotesEnum.FREE_ORDER_CHOICE],
+  },
+  {
+    id: 29,
+    gameType: 'deepSea',
+    taskTokens: [],
+    taskCards: 15,
+    note: '',
+    taskNotes: [SpecialNotesEnum.FREE_ORDER_CHOICE],
+  },
+  {
+    id: 30,
+    gameType: 'deepSea',
+    taskTokens: [],
+    taskCards: 16,
+    note: '',
+    taskNotes: [SpecialNotesEnum.FREE_ORDER_CHOICE],
+  },
+  {
+    id: 31,
+    gameType: 'deepSea',
+    taskTokens: [],
+    taskCards: 17,
+    note: '',
+    taskNotes: [SpecialNotesEnum.FREE_ORDER_CHOICE],
+  },
+  {
+    id: 32,
+    gameType: 'deepSea',
+    taskTokens: [],
+    taskCards: 0,
+    note: 'Nehmt für die Mission die folgenden Auftragskarten und wählt Sie wie gewohnt im Uhrzeigersinn: "Ich gewinne 0 Stiche", "Ich gewinne genau 3 Stiche in Folge", "Ich gewinne 2 Stiche in Folge" und "Ich gewinne den ersten und letzten Stich".',
+    taskNotes: [],
+  },
+];
+
+export default [...spaceMissions, ...deepSeaMissions];

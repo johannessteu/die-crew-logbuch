@@ -1,5 +1,5 @@
-import { createContext, useEffect, useState } from 'react';
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
 
 import CopyNotice from '../../components/CopyNotice';
@@ -11,7 +11,7 @@ import Section from '../../components/Sections/Section';
 import { CrewGameProvider } from '../../hooks/useCrewGame';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import { GameInterface, GameMissionInterface } from '../../interfaces';
-import { missions } from '../../missions';
+import missions from '../../missions';
 import firestoreDb from '../../utils/firestoreDb';
 
 interface GamePageInterface {
@@ -38,11 +38,11 @@ const GamePage: React.FC<GamePageInterface> = ({ game, gameMissions }) => {
         { identifier: game.identifier, crew: game.crewName },
       ]);
     }
-  }, [confirmed]);
+  }, [confirmed, crewGames, game.crewName, game.identifier, setCrewGames]);
 
   return (
     <CrewGameProvider game={game} gameMissions={gameMissions}>
-      <HeroSection>
+      <HeroSection background={game.type}>
         <h4 className="font-mono uppercase text-sm tracking-widest font-medium mb-2 inline-block border-b-2 border-red-500">
           Deine Crew
         </h4>
@@ -60,7 +60,7 @@ const GamePage: React.FC<GamePageInterface> = ({ game, gameMissions }) => {
       <Section bg="white pt-0">
         <h3 className="heroHeadline px-4 sm:px-0">Logbuch</h3>
         <div className="px-4 sm:p-0">
-          <Missions />
+          <Missions maxMissions={game.type === 'space' ? 50 : 32} />
         </div>
       </Section>
       <FeedbackBubble />
@@ -80,10 +80,15 @@ export const getServerSideProps: GetServerSideProps<GamePageInterface> =
       res.end();
     }
 
+    const { type, ...rest } = doc.data();
+
     return {
       props: {
-        gameMissions: missions,
-        game: doc.data() as GameInterface,
+        gameMissions: missions.filter((m) => m.gameType === type),
+        game: {
+          ...rest,
+          type: typeof type !== 'undefined' ? type : 'space',
+        } as GameInterface,
       },
     };
   };

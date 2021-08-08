@@ -251,7 +251,7 @@ const Mission: React.FC<{
   const [playedTime, setPlayedTime] = useState(0);
 
   const {
-    game: { missions },
+    game: { missions, type },
     gameMissions,
     action,
   } = useCrewGame();
@@ -394,7 +394,7 @@ const Mission: React.FC<{
                 <div className="flex flex-col md:flex-row">
                   <div className="mr-8 mb-8 ">
                     <span className="mb-1 inline-block uppercase">
-                      Missionen
+                      {type === 'deepSea' ? 'Schwierigkeitsgrad' : 'Missionen'}
                     </span>
                     {gameMission.taskCards === 0 ? (
                       <p>Keine</p>
@@ -405,25 +405,27 @@ const Mission: React.FC<{
                     )}
                   </div>
 
-                  <div className="flex flex-col">
-                    <span className="mb-1 inline-block uppercase">
-                      Auftragsplättchen
-                    </span>
+                  {type === 'space' && (
+                    <div className="flex flex-col">
+                      <span className="mb-1 inline-block uppercase">
+                        Auftragsplättchen
+                      </span>
 
-                    <div className="flex flex-wrap">
-                      {gameMission.taskTokens.length === 0 && <p>Keine</p>}
-                      {gameMission.taskTokens.map((token) => (
-                        <div
-                          key={token}
-                          className="bg-purple-700 mb-2 mr-2 p-1 w-14 h-18 rounded text-center"
-                        >
-                          <div className="bg-purple-700 text-white ring-2 ring-white h-14 ring-inset p-3 rounded">
-                            {getTokenElement(token)}
+                      <div className="flex flex-wrap">
+                        {gameMission.taskTokens.length === 0 && <p>Keine</p>}
+                        {gameMission.taskTokens.map((token) => (
+                          <div
+                            key={token}
+                            className="bg-purple-700 mb-2 mr-2 p-1 w-14 h-18 rounded text-center"
+                          >
+                            <div className="bg-purple-700 text-white ring-2 ring-white h-14 ring-inset p-3 rounded">
+                              {getTokenElement(token)}
+                            </div>
                           </div>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </div>
                 <span className="inline-block mt-8 uppercase">
                   Zusätzliche Aufgabe:
@@ -487,8 +489,8 @@ const MoreRow: React.FC<{ handleClick: () => void }> = ({ handleClick }) => {
   );
 };
 
-const Missions: React.FC = () => {
-  const [missionsToRender, setMissionsToRender] = useState([1, 50]);
+const Missions: React.FC<{ maxMissions: number }> = ({ maxMissions }) => {
+  const [missionsToRender, setMissionsToRender] = useState([1, maxMissions]);
 
   const {
     gameMissions,

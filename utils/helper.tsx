@@ -28,7 +28,9 @@ export const getSpecialMissionNotes = (
     return n;
   });
 
-  text.push(otherNote);
+  if (otherNote.length > 0) {
+    text.push(otherNote);
+  }
 
   if (text.length === 0) {
     return <p>keine</p>;
