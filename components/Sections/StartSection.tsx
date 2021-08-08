@@ -14,7 +14,7 @@ type ViewMode = 'INTRO' | 'CHOOSE_GAME' | 'NEW' | 'RESUME';
 const StartSection: React.FC = () => {
   const router = useRouter();
   const [viewMode, setViewMode] = useState<ViewMode>('INTRO');
-  const [gameType, setGameType] = useState<GameType | null>(null);
+  const [gameType, setGameType] = useState<GameType>('space');
 
   useEffect(() => {
     const { notfound } = router.query;
@@ -36,6 +36,9 @@ const StartSection: React.FC = () => {
         <TransparentBox className="md:w-10/12 xl:w-2/3 max-w-2xl">
           {viewMode === 'CHOOSE_GAME' ? (
             <ChooseGame
+              onSelect={(t) => {
+                setGameType(t);
+              }}
               onChoose={(type) => {
                 setGameType(type);
                 setViewMode('NEW');

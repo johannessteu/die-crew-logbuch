@@ -2,9 +2,10 @@ import * as React from 'react';
 
 import { GameType } from '../../interfaces';
 
-const ChooseGame: React.FC<{ onChoose: (type: GameType) => void }> = ({
-  onChoose,
-}) => {
+const ChooseGame: React.FC<{
+  onChoose: (type: GameType) => void;
+  onSelect: (type: GameType) => void;
+}> = ({ onChoose, onSelect }) => {
   const [type, setType] = React.useState<GameType>('space');
 
   const cardClassNames = 'bg-white rounded text-black p-3 cursor-pointer';
@@ -13,7 +14,10 @@ const ChooseGame: React.FC<{ onChoose: (type: GameType) => void }> = ({
     <div className="flex flex-col">
       <div className="mb-8 flex flex-row justify-center">
         <div
-          onClick={() => setType('space')}
+          onClick={() => {
+            setType('space');
+            onSelect('space');
+          }}
           className={`${cardClassNames} mr-3 ${
             type === 'space' && 'ring-4 ring-blue-600'
           }`}
@@ -21,7 +25,10 @@ const ChooseGame: React.FC<{ onChoose: (type: GameType) => void }> = ({
           Mission 9. Planet
         </div>
         <div
-          onClick={() => setType('deepSea')}
+          onClick={() => {
+            setType('deepSea');
+            onSelect('deepSea');
+          }}
           className={`${cardClassNames} mr-3 ${
             type === 'deepSea' && 'ring-4 ring-blue-600'
           }`}
