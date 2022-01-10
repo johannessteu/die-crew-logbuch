@@ -12,6 +12,7 @@ const HeroSection: React.FC<{ background: GameType }> = ({
   return (
     <div className="relative flex justify-center py-10 md:py-20">
       <Image
+        alt={''}
         className="object-center object-cover pointer-events-none"
         src={background === 'space' ? SpaceBg : DeepSeaBg}
         layout="fill"

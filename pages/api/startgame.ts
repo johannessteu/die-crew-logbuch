@@ -18,7 +18,7 @@ const generateRandomGameIdentifier = (): string => {
   return identifier + Math.floor(Math.random() * Math.floor(9999));
 };
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const startgame = async (req: NextApiRequest, res: NextApiResponse) => {
   const gamesRef = await db.collection('games');
   const identifier = generateRandomGameIdentifier();
 
@@ -52,3 +52,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   res.setHeader('Content-Type', 'application/json');
   res.end(JSON.stringify({ success: true, identifier }));
 };
+
+export default startgame;

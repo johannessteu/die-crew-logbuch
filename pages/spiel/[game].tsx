@@ -68,29 +68,30 @@ const GamePage: React.FC<GamePageInterface> = ({ game, gameMissions }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps<GamePageInterface> =
-  async ({ res, query }) => {
-    const { game } = query;
+export const getServerSideProps: GetServerSideProps<
+  GamePageInterface
+> = async ({ res, query }) => {
+  const { game } = query;
 
-    const docRef = firestoreDb.collection('games').doc(game as string);
-    const doc = await docRef.get();
+  const docRef = firestoreDb.collection('games').doc(game as string);
+  const doc = await docRef.get();
 
-    if (!doc.exists) {
-      res.writeHead(307, { Location: '/?notfound=1' });
-      res.end();
-    }
+  if (!doc.exists) {
+    res.writeHead(307, { Location: '/?notfound=1' });
+    res.end();
+  }
 
-    const { type, ...rest } = doc.data();
+  const { type, ...rest } = doc.data();
 
-    return {
-      props: {
-        gameMissions: missions.filter((m) => m.gameType === type),
-        game: {
-          ...rest,
-          type: typeof type !== 'undefined' ? type : 'space',
-        } as GameInterface,
-      },
-    };
+  return {
+    props: {
+      gameMissions: missions.filter((m) => m.gameType === type),
+      game: {
+        ...rest,
+        type: typeof type !== 'undefined' ? type : 'space',
+      } as GameInterface,
+    },
   };
+};
 
 export default GamePage;

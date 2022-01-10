@@ -748,4 +748,5 @@ const deepSeaMissions: DeepSeaMissionInterface[] = [
   },
 ];
 
-export default [...spaceMissions, ...deepSeaMissions];
+const allMissions = [...spaceMissions, ...deepSeaMissions];
+export default allMissions;
